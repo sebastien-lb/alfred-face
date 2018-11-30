@@ -4,6 +4,8 @@ import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import './SensorAdd.css';
+
 interface ISensorAddPageProps {
     addSensorRequest: (ip: string, port: string) => void;
 }
@@ -54,7 +56,7 @@ class SensorAddPage extends React.Component<ISensorAddPageProps, ISensorAddPageS
                             type="password"
                             onChange={(ev) => this.handlePortChange(ev.target.value)}/>
                         <Button variant="contained" color="primary" className="AddSensorPage-Button" onClick={() => this.handleSubmit()}>
-                            Log In
+                            Add Object
                         </Button>
                     </form>
                 </div>
