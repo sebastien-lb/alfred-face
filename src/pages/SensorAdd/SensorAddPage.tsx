@@ -15,10 +15,11 @@ interface ISensorAddPageState {
 
 class SensorAddPage extends React.Component<ISensorAddPageProps, ISensorAddPageState>  {
 
-    public componentWillMount(){
+    constructor(props: ISensorAddPageProps){
+        super(props);
         const ip = "";
         const port = "";
-        this.setState({ip, port})
+        this.state = {ip, port}
     }
 
     public handleIPChange(ip: string) {
