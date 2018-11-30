@@ -10,7 +10,7 @@ const mapStateToProps = (state: IStore) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    addSensorRequest: (ip: string, port: string) => void(0) /*dispatch(SENSOR_ACTIONS.addSensorRequest(ip, port))*/,
+    addSensorRequest: (ip: string, port: string) => ({}) /*dispatch(SENSOR_ACTIONS.addSensorRequest(ip, port))*/,
 
 });
 
