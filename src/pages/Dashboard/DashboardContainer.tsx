@@ -11,7 +11,8 @@ const mapStateToProps = (state: IStore) => {
 }
 
 const mapDispatchToProps = (dispatch:any) => ({
-    });
+    addSensorRequest: (ip: string, port: string) => ({}) /*dispatch(SENSOR_ACTIONS.addSensorRequest(ip, port))*/,
+});
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);

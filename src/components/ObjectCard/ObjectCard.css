@@ -1,0 +1,15 @@
+.ObjectCardContainer {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+.ObjectCardItem {
+    width: 100%;
+    border-right: 1px solid black;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+}
