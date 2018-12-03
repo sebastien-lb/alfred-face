@@ -1,0 +1,10 @@
+.AddSensorPage-Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.AddSensorPage-Form > * {
+    margin: 1rem 0 ! important;
+}
