@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { DashboardPage } from './Dashboard';
 
+import { SMART_OBJECT_ACTIONS } from 'src/store/smartobject';
 import { IStore } from '../../interfaces';
 
 const mapStateToProps = (state: IStore) => {
@@ -11,7 +12,7 @@ const mapStateToProps = (state: IStore) => {
 }
 
 const mapDispatchToProps = (dispatch:any) => ({
-    addSensorRequest: (ip: string, port: string) => ({}) /*dispatch(SENSOR_ACTIONS.addSensorRequest(ip, port))*/,
+    addSmartObjectRequest: (name: string, ip: string, port: string) => dispatch(SMART_OBJECT_ACTIONS.addSmartObjectRequest({ name, ip, port })),
 });
 
 

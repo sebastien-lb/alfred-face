@@ -9,25 +9,31 @@ import { ObjectCard } from '../../components';
 
 
 interface IDashboardPageProps {
-    addSensorRequest: (ip: string, port: string) => void;
+    addSmartObjectRequest: (name: string, ip: string, port: string) => void;
 }
 
 interface IDashboardPageState {
     ip: string;
     port: string;
+    name: string;
 }
 
 class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageState> {
-    
+
     constructor(props: IDashboardPageProps){
         super(props);
         const ip = "";
         const port = "";
-        this.state = {ip, port}
+        const name = "";
+        this.state = {ip, port, name}
     }
 
     public handleIPChange(ip: string) {
         this.setState({ip});
+    }
+
+    public handleNameChange(name: string) {
+        this.setState({ name });
     }
 
     public handlePortChange(port: string) {
@@ -35,7 +41,7 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
     }
 
     public handleSubmit() {
-        this.props.addSensorRequest(this.state.ip, this.state.port);
+        this.props.addSmartObjectRequest(this.state.name, this.state.ip, this.state.port);
     }
 
     public render() {
@@ -47,6 +53,12 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                 <div>
                     <form className="AddSensorPage-Form" autoComplete="off">
                         <TextField
+                            id="name"
+                            label="name"
+                            value={this.state.name}
+                            className="AddSensorPage-TextField"
+                            onChange={(ev) => this.handleNameChange(ev.target.value)} />
+                        <TextField
                             id="ip"
                             label="ip"
                             value={this.state.ip}
@@ -57,7 +69,7 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                             label="port"
                             value={this.state.port}
                             className="AddSensorPage-TextField"
-                            type="password"
+                            type="text"
                             onChange={(ev) => this.handlePortChange(ev.target.value)}/>
                         <Button variant="contained" color="primary" className="AddSensorPage-Button" onClick={() => this.handleSubmit()}>
                             Add Object
