@@ -1,4 +1,7 @@
-export interface IObjectStore {
+import { ISmartObject } from '../smartobject';
+
+export interface ISmartObjectStore {
+    smartObjects?: ISmartObject[];
     isLoading?: boolean;
     isLoadingError?: boolean;
     isAddingSmartObjectRequest?: boolean;
