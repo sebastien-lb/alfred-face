@@ -5,8 +5,8 @@ import TextField from '@material-ui/core/TextField';
 
 import './Dashboard.css';
 
-import { ISmartObject } from 'src/interfaces';
 import { ObjectCard } from '../../components';
+import { ISmartObject } from '../../interfaces';
 
 
 interface IDashboardPageProps {

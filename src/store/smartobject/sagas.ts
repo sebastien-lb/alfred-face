@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { ISmartObject } from 'src/interfaces';
+import { ISmartObject } from '../../interfaces';
 import { ActionTypes, SMART_OBJECT_ACTIONS } from './actions';
 import { Api } from './api';
 
