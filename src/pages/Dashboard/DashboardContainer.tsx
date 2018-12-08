@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import { DashboardPage } from './Dashboard';
 
-import { SMART_OBJECT_ACTIONS } from 'src/store/smartobject';
 import { IStore } from '../../interfaces';
+import { SMART_OBJECT_ACTIONS } from '../../store/smartobject';
 
 const mapStateToProps = (state: IStore) => {
     return {
