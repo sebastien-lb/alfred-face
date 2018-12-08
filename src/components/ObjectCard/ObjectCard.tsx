@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import "./ObjectCard.css";
 
+import { ISmartObject } from 'src/interfaces';
+
 // import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 // import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 // import Typography from '@material-ui/core/Typography';
@@ -11,8 +13,9 @@ import "./ObjectCard.css";
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 interface IObjectCardProps {
-    name: string;
+    smartObject: ISmartObject;
     category: string;
+
 }
 
 
@@ -22,13 +25,14 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
         return (
             <div className="ObjectCardContainer">
                     <div className="ObjectCardItem">
-                        {this.props.name}
+                        {this.props.smartObject.name}
                     </div>
                     <div className="ObjectCardItem">
                         {this.props.category}
                     </div>
                     <div className="ObjectCardItem">
-                        Hi jack
+                        <ul>{this.props.smartObject.ip}</ul>
+                        <ul>{this.props.smartObject.port}</ul>
                     </div>
 
                 {/* <ExpansionPanel>

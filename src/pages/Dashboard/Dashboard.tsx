@@ -59,7 +59,7 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                 <div className="SeriesPage-Tiles">
                     {(this.props.smartObjects || []).map(smartObject =>
                         <div key={`${smartObject.id}`}>
-                            <ObjectCard name={smartObject.name ? smartObject.name : "Test"} category={"Lamp"} />
+                            <ObjectCard smartObject={smartObject} category={"Lamp"} />
                         </div>
                     )}
                 </div>
