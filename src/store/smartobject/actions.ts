@@ -13,6 +13,7 @@ export interface IAddSmartObjectRequestPayload {
     name: string;
     ip: string;
     port: string;
+    token: string;
 }
 
 export interface IAddSmartObjectSuccessPayload {

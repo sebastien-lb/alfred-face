@@ -5,7 +5,7 @@ import { Api } from './api';
 
 export function* addSmartObjectRequest(params: any): Iterator<any> {
     try {
-        yield call(Api.addSmartObjectRequest, params.payload.name, params.payload.ip, params.payload.port);
+        yield call(Api.addSmartObjectRequest, params.payload.name, params.payload.ip, params.payload.port, params.payload.token);
         yield put(SMART_OBJECT_ACTIONS.addSmartObjectSuccess());
     } catch (error) {
         yield put(SMART_OBJECT_ACTIONS.addSmartObjectFailure());

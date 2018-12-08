@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { BACK_URL } from '../../const/api.const';
 
-const addSmartObjectRequest = async (name: string, ip: string, port: string) => {
+const addSmartObjectRequest = async (name: string, ip: string, port: string, token: string) => {
 
     const url = BACK_URL + '/registerDevice';
     const rep = await axios.post(url, { name, address_ip: ip, port}, {
         headers: {
-            'Authorization': 'Token xxx'
+            'Authorization': 'Token ' + token
         }
     });
     return rep;

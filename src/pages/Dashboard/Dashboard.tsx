@@ -9,7 +9,8 @@ import { ObjectCard } from '../../components';
 
 
 interface IDashboardPageProps {
-    addSmartObjectRequest: (name: string, ip: string, port: string) => void;
+    userToken: string;
+    addSmartObjectRequest: (name: string, ip: string, port: string, token: string) => void;
 }
 
 interface IDashboardPageState {
@@ -41,7 +42,7 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
     }
 
     public handleSubmit() {
-        this.props.addSmartObjectRequest(this.state.name, this.state.ip, this.state.port);
+        this.props.addSmartObjectRequest(this.state.name, this.state.ip, this.state.port, this.props.userToken);
     }
 
     public render() {

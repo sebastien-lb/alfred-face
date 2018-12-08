@@ -7,12 +7,12 @@ import { IStore } from '../../interfaces';
 
 const mapStateToProps = (state: IStore) => {
     return {
-
+        userToken: state.userReducer.user ? state.userReducer.user.token : null,
     };
 }
 
 const mapDispatchToProps = (dispatch:any) => ({
-    addSmartObjectRequest: (name: string, ip: string, port: string) => dispatch(SMART_OBJECT_ACTIONS.addSmartObjectRequest({ name, ip, port })),
+    addSmartObjectRequest: (name: string, ip: string, port: string, token: string) => dispatch(SMART_OBJECT_ACTIONS.addSmartObjectRequest({ name, ip, port, token })),
 });
 
 
