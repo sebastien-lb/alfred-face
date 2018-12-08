@@ -7,6 +7,10 @@ export enum ActionTypes {
     ADD_REQUEST = 'ADD_REQUEST',
     ADD_SUCCESS = 'ADD_SUCCESS',
     ADD_FAILURE = 'ADD_FAILURE',
+
+    FETCH_ALL_SMART_OBJECTS_FAILURE = 'FETCH_ALL_SMART_OBJECTS_FAILURE',
+    FETCH_ALL_SMART_OBJECTS_SUCCESS = 'FETCH_ALL_SMART_OBJECTS_SUCCESS',
+    FETCH_ALL_SMART_OBJECTS_REQUEST = 'FETCH_ALL_SMART_OBJECTS_REQUEST'
 }
 
 export interface IAddSmartObjectRequestPayload {
@@ -17,10 +21,21 @@ export interface IAddSmartObjectRequestPayload {
 }
 
 export interface IAddSmartObjectSuccessPayload {
-    user: ISmartObject;
+    smartObject: ISmartObject;
+}
+
+export interface IFetchAllSmartObjectsRequestPayload {
+    token: string;
+}
+export interface IFetchAllSmartObjectsSuccess {
+    smartObjects: ISmartObject[];
 }
 
 export const SMART_OBJECT_ACTIONS = {
+    fetchAllSmartObjectsFailure: () => createAction(ActionTypes.FETCH_ALL_SMART_OBJECTS_FAILURE),
+    fetchAllSmartObjectsRequest: (payload: IFetchAllSmartObjectsRequestPayload) => createAction(ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST, payload),
+    fetchAllSmartObjectsSuccess: (payload: IFetchAllSmartObjectsSuccess) => createAction(ActionTypes.FETCH_ALL_SMART_OBJECTS_SUCCESS, payload),
+
     addSmartObjectFailure: () => createAction(ActionTypes.ADD_FAILURE),
     addSmartObjectRequest: (payload: IAddSmartObjectRequestPayload) => createAction(ActionTypes.ADD_REQUEST, payload),
     addSmartObjectSuccess: () => createAction(ActionTypes.ADD_SUCCESS),

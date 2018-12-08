@@ -5,12 +5,15 @@ import TextField from '@material-ui/core/TextField';
 
 import './Dashboard.css';
 
+import { ISmartObject } from 'src/interfaces';
 import { ObjectCard } from '../../components';
 
 
 interface IDashboardPageProps {
     userToken: string;
+    smartObjects: ISmartObject[];
     addSmartObjectRequest: (name: string, ip: string, port: string, token: string) => void;
+    fetchAllSmartObjectsRequest: (token: string) => void;
 }
 
 interface IDashboardPageState {
@@ -27,6 +30,10 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
         const port = "";
         const name = "";
         this.state = {ip, port, name}
+    }
+
+    public componentWillMount() {
+        this.props.fetchAllSmartObjectsRequest(this.props.userToken);
     }
 
     public handleIPChange(ip: string) {
@@ -49,7 +56,13 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
         return (
             <div className="DashboardPage">
             DashboardPage
-            <ObjectCard name={"Lampe"} category={"Lamp"}/>
+                <div className="SeriesPage-Tiles">
+                    {(this.props.smartObjects || []).map(smartObject =>
+                        <div key={`${smartObject.id}`}>
+                            <ObjectCard name={smartObject.name ? smartObject.name : "Test"} category={"Lamp"} />
+                        </div>
+                    )}
+                </div>
 
                 <div>
                     <form className="AddSensorPage-Form" autoComplete="off">
