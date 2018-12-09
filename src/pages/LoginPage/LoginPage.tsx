@@ -16,10 +16,11 @@ interface ILoginProps {
 
 export class LoginPage extends React.Component<ILoginProps,ILoginState> {
 
-  public componentWillMount(){
+  public constructor(props: ILoginProps) {
+      super(props);
       const login = "";
       const password = "";
-      this.setState({login, password})
+      this.state = {login, password};
   }
 
   public handleLoginChange(login: string) {
@@ -37,7 +38,6 @@ export class LoginPage extends React.Component<ILoginProps,ILoginState> {
   public render() {
     return (
       <div className="LoginPage">
-        Log In
         <div>
             <form className="LoginPage-Form" autoComplete="off">
                 <TextField 
