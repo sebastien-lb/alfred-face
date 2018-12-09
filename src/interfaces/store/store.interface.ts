@@ -1,5 +1,7 @@
-import { IObjectStore } from './object-store.interface';
+import { ISmartObjectStore } from './smart-objects-state';
+import { IUserState } from './user-state';
 
 export interface IStore {
-    objectReducer: IObjectStore;
+    smartObjectReducer: ISmartObjectStore;
+    userReducer: IUserState;
 }

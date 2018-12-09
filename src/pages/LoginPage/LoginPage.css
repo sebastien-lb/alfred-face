@@ -1,0 +1,20 @@
+
+.LoginPage {
+    padding-top: 4rem;
+}
+
+.LoginPage-Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.LoginPage-TextField {
+    width: 200px !important;
+    padding: 1rem 0 !important;
+}
+
+.LoginPage-Button{
+    margin-top: 2rem !important;
+}

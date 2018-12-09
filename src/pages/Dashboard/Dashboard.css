@@ -1,0 +1,18 @@
+.AddSensorPage-Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.AddSensorPage-Form > * {
+    margin: 1rem 0 ! important;
+}
+
+.DashboardPage {
+    padding: 2rem;
+}
+
+.DashboardPage-ObjectCard {
+    padding: 0.5rem 0;
+}

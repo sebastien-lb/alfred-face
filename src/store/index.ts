@@ -4,35 +4,38 @@ import createSagaMiddleware from 'redux-saga';
 import { history, middleware } from './router';
 
 
-import { persistStore } from 'redux-persist'; // persistReducer
+import { persistReducer, persistStore } from 'redux-persist'; // 
 
-// import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage';
 
-import { objectReducer, objectSaga} from '../store/commands';
+import { smartObjectReducer, smartObjectSaga } from '../store/smartobject';
+import { userReducer, userSaga } from '../store/user';
 
 const sagaMiddleware = createSagaMiddleware();
 
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-// };
+const persistConfig = {
+    key: 'root',
+    storage,
+};
 
 const rootReducer = connectRouter(history)(
     combineReducers({
-        objectReducer,
+        smartObjectReducer,
+        userReducer
     }));
 
-// const pReducer = persistReducer(persistConfig, rootReducer);
+const pReducer = persistReducer(persistConfig, rootReducer);
 
 
 // REDUX DEV TOOLS EXTENSION ABILITY --- MAYBE REMOVE IN PROD ?? YES
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
-    // pReducer,
-    rootReducer,
+    pReducer,
+    // rootReducer,
     {}, // initial state
     composeEnhancers(applyMiddleware(middleware, sagaMiddleware)));
 
 export const persistor = persistStore(store);
 
-sagaMiddleware.run(objectSaga);
+sagaMiddleware.run(smartObjectSaga);
+sagaMiddleware.run(userSaga);
