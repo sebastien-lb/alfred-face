@@ -1,4 +1,4 @@
-import { ISmartObject } from '../smartobject';
+import { ISmartObject } from '../smart-object';
 
 export interface ISmartObjectStore {
     smartObjects?: ISmartObject[];
