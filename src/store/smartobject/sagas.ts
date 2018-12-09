@@ -11,6 +11,7 @@ export function* fetchAllSmartObjectsRequest(params: any): Iterator<any> {
 
         // // add missing value from api
         data = data.map((item: any): ISmartObject => ({
+            actions: item.actions,
             id: item.id,
             ip: item.address_ip,
             name: item.name,

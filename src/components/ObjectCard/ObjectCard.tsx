@@ -21,18 +21,25 @@ interface IObjectCardProps {
 
 class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
+    public handleMainAction() {
+        return;
+    }
+
     public render() {
+        const smartObject = this.props.smartObject;
+        const mainAction: string = smartObject.actions && smartObject.actions.length ? smartObject.actions[0].name : ""; 
         return (
             <div className="ObjectCardContainer">
                     <div className="ObjectCardItem">
-                        {this.props.smartObject.name}
+                        {smartObject.name}
                     </div>
                     <div className="ObjectCardItem">
-                        {this.props.category}
+                        <span>{this.props.category}</span>
+                        <span onClick={() => this.handleMainAction()}>{mainAction}</span>
                     </div>
                     <div className="ObjectCardItem">
-                        <ul>{this.props.smartObject.ip}</ul>
-                        <ul>{this.props.smartObject.port}</ul>
+                        <ul>{smartObject.ip}</ul>
+                        <ul>{smartObject.port}</ul>
                     </div>
 
                 {/* <ExpansionPanel>
