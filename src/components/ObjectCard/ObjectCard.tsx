@@ -15,25 +15,20 @@ import { ISmartObject } from '../../interfaces';
 interface IObjectCardProps {
     smartObject: ISmartObject;
     category: string;
-    onMainAction: (actionId: string) => void;
+    onAction: (actionId: string) => void;
 }
 
 
 class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
-    public handleMainAction() {
+    public handleAction(actionId: string) {
         console.log("clicked amene des crepes");
-        const smartObject = this.props.smartObject;
-
-        if (smartObject.actions && smartObject.actions.length ) {
-            this.props.onMainAction(smartObject.actions[0].id);
-        } 
-    
+        this.props.onAction(actionId);
     }
 
     public render() {
         const smartObject = this.props.smartObject;
-        const mainActionName: string = smartObject.actions && smartObject.actions.length ? smartObject.actions[0].name : ""; 
+        // const mainActionName: string = smartObject.actions && smartObject.actions.length ? smartObject.actions[0].name : "";
         return (
             <div className="ObjectCardContainer">
                     <div className="ObjectCardItem">
@@ -41,7 +36,13 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     </div>
                     <div className="ObjectCardItem">
                         <span>{this.props.category}</span>
-                        <span onClick={() => this.handleMainAction()}>{mainActionName}</span>
+
+                        {(this.props.smartObject.actions || []).map(action =>
+                            <span onClick={() => this.handleAction(action.id)} key={action.id}>{action.name}</span>
+                        )}
+
+
+                        {/*<span onClick={() => this.handleMainAction()}>{mainActionName}</span>*/}
                     </div>
                     <div className="ObjectCardItem">
                         <ul>{smartObject.ip}</ul>
