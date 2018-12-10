@@ -16,11 +16,11 @@ class App extends React.Component {
         <Switch>
           <Route path='/login' component={LoginPage} />
           <Route path='/home' component={DashboardPage} />
+          <Route path='/azerty' component={DashboardPage} />
           <Route path='/' component={LoginPage} />
         </Switch>
       </div>
     );
-
   }
 }
 

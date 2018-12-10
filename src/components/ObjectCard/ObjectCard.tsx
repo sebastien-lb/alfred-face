@@ -15,19 +15,25 @@ import { ISmartObject } from '../../interfaces';
 interface IObjectCardProps {
     smartObject: ISmartObject;
     category: string;
-
+    onMainAction: (actionId: string) => void;
 }
 
 
 class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
     public handleMainAction() {
-        return;
+        console.log("clicked amene des crepes");
+        const smartObject = this.props.smartObject;
+
+        if (smartObject.actions && smartObject.actions.length ) {
+            this.props.onMainAction(smartObject.actions[0].id);
+        } 
+    
     }
 
     public render() {
         const smartObject = this.props.smartObject;
-        const mainAction: string = smartObject.actions && smartObject.actions.length ? smartObject.actions[0].name : ""; 
+        const mainActionName: string = smartObject.actions && smartObject.actions.length ? smartObject.actions[0].name : ""; 
         return (
             <div className="ObjectCardContainer">
                     <div className="ObjectCardItem">
@@ -35,7 +41,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     </div>
                     <div className="ObjectCardItem">
                         <span>{this.props.category}</span>
-                        <span onClick={() => this.handleMainAction()}>{mainAction}</span>
+                        <span onClick={() => this.handleMainAction()}>{mainActionName}</span>
                     </div>
                     <div className="ObjectCardItem">
                         <ul>{smartObject.ip}</ul>

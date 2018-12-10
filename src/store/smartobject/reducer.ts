@@ -33,7 +33,15 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
             isAddingSmartObjectSuccess = false;
             return { ...state, isAddingSmartObjectError, isAddingSmartObjectRequest, isAddingSmartObjectSuccess };
 
+        // ACTION PERFORMED
+        case ActionTypes.PERFORM_ACTION_REQUEST:
+            return { ...state, };
+        case ActionTypes.PERFORM_ACTION_SUCCESS:
+            return { ...state, };
+        case ActionTypes.PERFORM_ACTION_FAILURE:
+            return { ...state, };
+
         default:
-            return state;
+            return {...state, };
     }
 }

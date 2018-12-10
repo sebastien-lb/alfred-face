@@ -32,7 +32,17 @@ export function* addSmartObjectRequest(params: any): Iterator<any> {
     }
 }
 
+export function* performActionRequest(params: any): Iterator<any> {
+    try {
+        yield call(Api.performActionRequest, params.payload.actionId, params.payload.token);
+        yield put(SMART_OBJECT_ACTIONS.performActionSuccess());
+    } catch (error) {
+        yield put(SMART_OBJECT_ACTIONS.performActionFailure());
+    }
+}
+
 export function* smartObjectSaga(): Iterator<any> {
     yield takeEvery(ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST, fetchAllSmartObjectsRequest);
     yield takeEvery(ActionTypes.ADD_REQUEST, addSmartObjectRequest);
+    yield takeEvery(ActionTypes.PERFORM_ACTION_REQUEST, performActionRequest);
 }

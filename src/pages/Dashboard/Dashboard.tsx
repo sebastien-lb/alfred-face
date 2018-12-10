@@ -14,6 +14,7 @@ interface IDashboardPageProps {
     smartObjects: ISmartObject[];
     addSmartObjectRequest: (name: string, ip: string, port: string, token: string) => void;
     fetchAllSmartObjectsRequest: (token: string) => void;
+    performActionRequest: (actionId: string, token: string) => void;
 }
 
 interface IDashboardPageState {
@@ -58,7 +59,10 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                 <div className="DashboardPage-ObjectCards">
                     {(this.props.smartObjects || []).map(smartObject =>
                         <div className="DashboardPage-ObjectCard" key={`${smartObject.id}`}>
-                            <ObjectCard smartObject={smartObject} category={"Lamp"} />
+                            <ObjectCard 
+                                smartObject={smartObject} 
+                                category={"Lamp"} 
+                                onMainAction={(actionId) => this.props.performActionRequest(actionId, this.props.userToken)}/>
                         </div>
                     )}
                 </div>
