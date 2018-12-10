@@ -8,10 +8,10 @@ export function* fetchAllSmartObjectsRequest(params: any): Iterator<any> {
     try {
         const rep = yield call(Api.fetchAllSmartObjectsRequest, params.payload.token);
         let data = rep.data;
-
         // // add missing value from api
         data = data.map((item: any): ISmartObject => ({
             actions: item.actions,
+            dataSources: item.data_sources,
             id: item.id,
             ip: item.address_ip,
             name: item.name,
@@ -45,4 +45,5 @@ export function* smartObjectSaga(): Iterator<any> {
     yield takeEvery(ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST, fetchAllSmartObjectsRequest);
     yield takeEvery(ActionTypes.ADD_REQUEST, addSmartObjectRequest);
     yield takeEvery(ActionTypes.PERFORM_ACTION_REQUEST, performActionRequest);
+
 }

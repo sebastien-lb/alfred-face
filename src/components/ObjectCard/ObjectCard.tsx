@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import "./ObjectCard.css";
 
-import { ISmartObject } from '../../interfaces';
+import {ISmartObject} from '../../interfaces';
 
 // import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 // import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -28,21 +28,18 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
     public render() {
         const smartObject = this.props.smartObject;
-        // const mainActionName: string = smartObject.actions && smartObject.actions.length ? smartObject.actions[0].name : "";
+        const dataSource: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
         return (
             <div className="ObjectCardContainer">
                     <div className="ObjectCardItem">
-                        {smartObject.name}
+                        <span>{smartObject.name}</span>
+                        <span>{dataSource}</span>
                     </div>
                     <div className="ObjectCardItem">
                         <span>{this.props.category}</span>
-
                         {(this.props.smartObject.actions || []).map(action =>
                             <span onClick={() => this.handleAction(action.id)} key={action.id}>{action.name}</span>
                         )}
-
-
-                        {/*<span onClick={() => this.handleMainAction()}>{mainActionName}</span>*/}
                     </div>
                     <div className="ObjectCardItem">
                         <ul>{smartObject.ip}</ul>
