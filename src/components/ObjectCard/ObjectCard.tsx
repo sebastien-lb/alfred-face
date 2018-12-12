@@ -3,14 +3,9 @@ import * as React from 'react';
 
 import "./ObjectCard.css";
 
-import {ISmartObject} from '../../interfaces';
+import { ISmartObject } from '../../interfaces';
 
-// import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-// import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-// import Typography from '@material-ui/core/Typography';
-
-// import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Card from '@material-ui/core/Card';
 
 interface IObjectCardProps {
     smartObject: ISmartObject;
@@ -30,7 +25,8 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
         const smartObject = this.props.smartObject;
         const dataSource: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
         return (
-            <div className="ObjectCardContainer">
+            <Card >
+                <div className="ObjectCardContainer">
                     <div className="ObjectCardItem">
                         <span>{smartObject.name}</span>
                         <span>{dataSource}</span>
@@ -41,23 +37,12 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                             <span onClick={() => this.handleAction(action.id)} key={action.id}>{action.name}</span>
                         )}
                     </div>
-                    <div className="ObjectCardItem">
+                    <div className="ObjectCardItem LastItem">
                         <ul>{smartObject.ip}</ul>
                         <ul>{smartObject.port}</ul>
                     </div>
-
-                {/* <ExpansionPanel>
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>Expansion Panel 1</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel> */}
-            </div>
+                </div>
+            </Card>
         );
     }
 }
