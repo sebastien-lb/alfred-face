@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { DashboardPage } from './Dashboard';
 
 import { IStore } from '../../interfaces';
-import { SMART_OBJECT_ACTIONS } from '../../store/smartobject';
+import { getNotifMessage, SMART_OBJECT_ACTIONS } from '../../store/smartobject';
 
 const mapStateToProps = (state: IStore) => {
     return {
+        notifMessage: getNotifMessage(state.smartObjectReducer),
         smartObjects: state.smartObjectReducer.smartObjects,
         userToken: state.userReducer.user ? state.userReducer.user.token : null,
     };

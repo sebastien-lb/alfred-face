@@ -6,15 +6,20 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
     let isAddingSmartObjectRequest: boolean;
     let isAddingSmartObjectError: boolean;
     let isAddingSmartObjectSuccess: boolean;
+    
+    let isLoadingError: boolean;
 
     switch (action.type) {
         // SERIES fetch
         case ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST:
-            return { ...state, };
+            isLoadingError = false;
+            return { ...state, isLoadingError};
         case ActionTypes.FETCH_ALL_SMART_OBJECTS_SUCCESS:
-            return { ...state, smartObjects: action.payload ? action.payload.smartObjects : [] };
+            isLoadingError = false;
+            return { ...state, smartObjects: action.payload ? action.payload.smartObjects : [], isLoadingError };
         case ActionTypes.FETCH_ALL_SMART_OBJECTS_FAILURE:
-            return { ...state, };
+            isLoadingError = true;
+            return { ...state, isLoadingError};
 
         // Add Smart Object
         case ActionTypes.ADD_REQUEST:

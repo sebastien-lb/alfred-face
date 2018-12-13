@@ -5,6 +5,7 @@ import "./ObjectCard.css";
 
 import { ISmartObject } from '../../interfaces';
 
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 
 interface IObjectCardProps {
@@ -17,7 +18,6 @@ interface IObjectCardProps {
 class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
     public handleAction(actionId: string) {
-        console.log("clicked amene des crepes");
         this.props.onAction(actionId);
     }
 
@@ -28,13 +28,15 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
             <Card >
                 <div className="ObjectCardContainer">
                     <div className="ObjectCardItem">
-                        <span>{smartObject.name}</span>
+                        <span className="ObjectCardItem-Title">{smartObject.name}</span>
                         <span>{dataSource}</span>
                     </div>
                     <div className="ObjectCardItem">
-                        <span>{this.props.category}</span>
+                        <span className="ObjectCardItem-Title">{this.props.category}</span>
                         {(this.props.smartObject.actions || []).map(action =>
-                            <span onClick={() => this.handleAction(action.id)} key={action.id}>{action.name}</span>
+                            <Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>
+                                {action.name}
+                            </Button>
                         )}
                     </div>
                     <div className="ObjectCardItem LastItem">

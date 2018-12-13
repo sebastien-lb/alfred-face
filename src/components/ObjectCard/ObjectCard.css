@@ -21,3 +21,8 @@
 .ObjectCardItem.LastItem {
     border-right: none;
 }
+
+.ObjectCardItem-Title {
+    padding-bottom: 0.3rem;
+    font-weight: bold;
+}
