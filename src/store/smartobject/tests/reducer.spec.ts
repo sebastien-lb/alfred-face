@@ -16,8 +16,17 @@ describe("SmartObject Reducer", () => {
             smartObjectReducer(initialState, {
               type: ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST
             })
-        ).toEqual({});
-    })
+        ).toEqual({isLoadingError: false});
+    });
+
+    it('Should handle FETCH_ALL_SMART_OBJECTS_FAILURE', () => {
+
+        expect(
+            smartObjectReducer(initialState, {
+              type: ActionTypes.FETCH_ALL_SMART_OBJECTS_FAILURE
+            })
+        ).toEqual({isLoadingError: true});
+    });
 
     it('Should handle FETCH_ALL_SMART_OBJECTS_SUCCESS', () => {
         const smartObjects: ISmartObject[] = [
@@ -30,7 +39,48 @@ describe("SmartObject Reducer", () => {
               type: ActionTypes.FETCH_ALL_SMART_OBJECTS_SUCCESS
             })
         ).toEqual({
+            isLoadingError: false,
             smartObjects
         });
-    })
+    });
+
+    it('Should handle ADD_REQUEST', () => {
+
+        expect(
+            smartObjectReducer(initialState, {
+              type: ActionTypes.ADD_REQUEST
+            })
+        ).toEqual({
+            isAddingSmartObjectError: false,
+            isAddingSmartObjectRequest: true,
+            isAddingSmartObjectSuccess: false
+        });
+    });
+
+    it('Should handle ADD_SUCCESS', () => {
+
+        expect(
+            smartObjectReducer(initialState, {
+              type: ActionTypes.ADD_SUCCESS
+            })
+        ).toEqual({
+            isAddingSmartObjectError: false,
+            isAddingSmartObjectRequest: false,
+            isAddingSmartObjectSuccess: true
+        });
+    });
+
+    it('Should handle ADD_FAILURE', () => {
+
+        expect(
+            smartObjectReducer(initialState, {
+              type: ActionTypes.ADD_FAILURE
+            })
+        ).toEqual({
+            isAddingSmartObjectError: true,
+            isAddingSmartObjectRequest: false,
+            isAddingSmartObjectSuccess: false
+        });
+    });
+
 })
