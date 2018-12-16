@@ -5,48 +5,46 @@ import "./ObjectCard.css";
 
 import { ISmartObject } from '../../interfaces';
 
-// import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-// import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-// import Typography from '@material-ui/core/Typography';
-
-// import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 
 interface IObjectCardProps {
     smartObject: ISmartObject;
     category: string;
-
+    onAction: (actionId: string) => void;
 }
 
 
 class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
-    public render() {
-        return (
-            <div className="ObjectCardContainer">
-                    <div className="ObjectCardItem">
-                        {this.props.smartObject.name}
-                    </div>
-                    <div className="ObjectCardItem">
-                        {this.props.category}
-                    </div>
-                    <div className="ObjectCardItem">
-                        <ul>{this.props.smartObject.ip}</ul>
-                        <ul>{this.props.smartObject.port}</ul>
-                    </div>
+    public handleAction(actionId: string) {
+        this.props.onAction(actionId);
+    }
 
-                {/* <ExpansionPanel>
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography>Expansion Panel 1</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel> */}
-            </div>
+    public render() {
+        const smartObject = this.props.smartObject;
+        const dataSource: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
+        return (
+            <Card >
+                <div className="ObjectCardContainer">
+                    <div className="ObjectCardItem">
+                        <span className="ObjectCardItem-Title">{smartObject.name}</span>
+                        <span>{dataSource}</span>
+                    </div>
+                    <div className="ObjectCardItem">
+                        <span className="ObjectCardItem-Title">{this.props.category}</span>
+                        {(this.props.smartObject.actions || []).map(action =>
+                            <Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>
+                                {action.name}
+                            </Button>
+                        )}
+                    </div>
+                    <div className="ObjectCardItem LastItem">
+                        <ul>{smartObject.ip}</ul>
+                        <ul>{smartObject.port}</ul>
+                    </div>
+                </div>
+            </Card>
         );
     }
 }

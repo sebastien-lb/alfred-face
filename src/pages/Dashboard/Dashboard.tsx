@@ -5,15 +5,17 @@ import TextField from '@material-ui/core/TextField';
 
 import './Dashboard.css';
 
-import { ObjectCard } from '../../components';
+import { Notification, ObjectCard } from '../../components';
 import { ISmartObject } from '../../interfaces';
 
 
 interface IDashboardPageProps {
     userToken: string;
+    notifMessage?: string;
     smartObjects: ISmartObject[];
     addSmartObjectRequest: (name: string, ip: string, port: string, token: string) => void;
     fetchAllSmartObjectsRequest: (token: string) => void;
+    performActionRequest: (actionId: string, token: string) => void;
 }
 
 interface IDashboardPageState {
@@ -58,7 +60,10 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                 <div className="DashboardPage-ObjectCards">
                     {(this.props.smartObjects || []).map(smartObject =>
                         <div className="DashboardPage-ObjectCard" key={`${smartObject.id}`}>
-                            <ObjectCard smartObject={smartObject} category={"Lamp"} />
+                            <ObjectCard 
+                                smartObject={smartObject} 
+                                category={"Lamp"} 
+                                onAction={(actionId) => this.props.performActionRequest(actionId, this.props.userToken)}/>
                         </div>
                     )}
                 </div>
@@ -89,6 +94,7 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                         </Button>
                     </form>
                 </div>
+                {this.props.notifMessage ? <Notification message={this.props.notifMessage}/> : null }
             </div>
         );
     }
