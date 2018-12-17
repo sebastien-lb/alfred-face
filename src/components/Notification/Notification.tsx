@@ -1,5 +1,7 @@
 import * as React from 'react';
-import "./Notification.css";
+// import "./Notification.css";
+
+import { Style } from './Notification.style';
 
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -7,17 +9,19 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import CloseIcon from '@material-ui/icons/Close';
 
 import ErrorIcon from '@material-ui/icons/Error';
+import styled from 'styled-components';
 
 
 interface INotificationProps {
     message: string;
+    className?: string;
 };
 
 interface INotificationState {
     open: boolean;
 }
 
-export class Notification extends React.Component<INotificationProps, INotificationState> {
+class Notification extends React.Component<INotificationProps, INotificationState> {
 
   constructor(props: INotificationProps){
       super(props);
@@ -31,6 +35,7 @@ export class Notification extends React.Component<INotificationProps, INotificat
   public render() {
     return (
         <Snackbar
+            className={this.props.className}
             anchorOrigin={{
                 horizontal: 'left',
                 vertical: 'bottom',
@@ -40,13 +45,13 @@ export class Notification extends React.Component<INotificationProps, INotificat
             onClose={() => this.handleClose()}
             >
                 <SnackbarContent
-                    className="RegisterPage-SnackBarContent"
+                    className="Notification-SnackBarContent"
                     aria-describedby="client-snackbar"
                     message={
-                        <span id="client-snackbar">
+                        <Style.textNotification id="client-snackbar">
                             <ErrorIcon/>
                             {this.props.message}
-                        </span>
+                        </Style.textNotification>
                     }
                     action={[
                         <IconButton
@@ -63,3 +68,5 @@ export class Notification extends React.Component<INotificationProps, INotificat
     );
   }
 }
+
+export default styled(Notification)`${Style.NotificationStyle}`

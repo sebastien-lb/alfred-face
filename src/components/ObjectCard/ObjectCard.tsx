@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 
-import "./ObjectCard.css";
+import { Style } from './ObjectCard.style';
 
 import { ISmartObject } from '../../interfaces';
 
@@ -26,24 +26,24 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
         const dataSource: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
         return (
             <Card >
-                <div className="ObjectCardContainer">
-                    <div className="ObjectCardItem">
-                        <span className="ObjectCardItem-Title">{smartObject.name}</span>
+                <Style.ObjectCardContainer>
+                    <Style.ObjectCardItem>
+                        <Style.ObjectCardItemTitle>{smartObject.name}</Style.ObjectCardItemTitle>
                         <span>{dataSource}</span>
-                    </div>
-                    <div className="ObjectCardItem">
-                        <span className="ObjectCardItem-Title">{this.props.category}</span>
+                    </Style.ObjectCardItem>
+                    <Style.ObjectCardItem>
+                        <Style.ObjectCardItemTitle>{this.props.category}</Style.ObjectCardItemTitle>
                         {(this.props.smartObject.actions || []).map(action =>
                             <Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>
                                 {action.name}
                             </Button>
                         )}
-                    </div>
-                    <div className="ObjectCardItem LastItem">
+                    </Style.ObjectCardItem>
+                    <Style.ObjectCardItemLastItem>
                         <ul>{smartObject.ip}</ul>
                         <ul>{smartObject.port}</ul>
-                    </div>
-                </div>
+                    </Style.ObjectCardItemLastItem>
+                </Style.ObjectCardContainer>
             </Card>
         );
     }

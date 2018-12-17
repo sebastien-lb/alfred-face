@@ -3,7 +3,8 @@ import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import './Dashboard.css';
+// import './Dashboard.css';
+import { Style } from './Dashboard.style';
 
 import { Notification, ObjectCard } from '../../components';
 import { ISmartObject } from '../../interfaces';
@@ -56,20 +57,20 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
 
     public render() {
         return (
-            <div className="DashboardPage">
+            <Style.DashboardPageContainer>
                 <div className="DashboardPage-ObjectCards">
                     {(this.props.smartObjects || []).map(smartObject =>
-                        <div className="DashboardPage-ObjectCard" key={`${smartObject.id}`}>
+                        <Style.ObjectCardContainer key={`${smartObject.id}`}>
                             <ObjectCard 
                                 smartObject={smartObject} 
                                 category={"Lamp"} 
                                 onAction={(actionId) => this.props.performActionRequest(actionId, this.props.userToken)}/>
-                        </div>
+                        </Style.ObjectCardContainer>
                     )}
                 </div>
 
                 <div>
-                    <form className="AddSensorPage-Form" autoComplete="off">
+                    <Style.AddSensorForm autoComplete="off">
                         <TextField
                             id="name"
                             label="name"
@@ -92,10 +93,10 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                         <Button variant="contained" color="primary" className="AddSensorPage-Button" onClick={() => this.handleSubmit()}>
                             Add Object
                         </Button>
-                    </form>
+                    </Style.AddSensorForm>
                 </div>
                 {this.props.notifMessage ? <Notification message={this.props.notifMessage}/> : null }
-            </div>
+            </Style.DashboardPageContainer>
         );
     }
 }
