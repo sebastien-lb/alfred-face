@@ -1,3 +1,7 @@
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
 
 import * as React from 'react';
 
@@ -16,6 +20,21 @@ interface IObjectCardProps {
 
 
 class ObjectCard extends React.Component<IObjectCardProps, {}>  {
+    public state = {
+        expanded: false,
+    };
+    
+    public handleClickLastItem() {
+        this.setState({
+          expanded: true
+        });
+    };
+
+    public onChangeExpansionPanel() {
+        this.setState({
+            expanded: false 
+        });
+    }
 
     public handleAction(actionId: string) {
         this.props.onAction(actionId);
@@ -39,12 +58,22 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                             </Button>
                         )}
                     </Style.ObjectCardItem>
-                    <Style.ObjectCardItemLastItem>
+                    <Style.ObjectCardItemLastItem onClick={() => this.handleClickLastItem()}>
                         <ul>{smartObject.ip}</ul>
                         <ul>{smartObject.port}</ul>
                     </Style.ObjectCardItemLastItem>
-                </Style.ObjectCardContainer>
-            </Card>
+                    </Style.ObjectCardContainer>
+
+                <ExpansionPanel expanded={this.state.expanded} onChange={(event, expanded) => this.onChangeExpansionPanel()}>
+                    {this.state.expanded ? <ExpansionPanelSummary /> : null}
+                    <ExpansionPanelDetails>
+                    <Typography>
+                        Lampe connectéeeeeee
+                    </Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+
+            </Card>           
         );
     }
 }
