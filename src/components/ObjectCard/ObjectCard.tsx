@@ -68,14 +68,12 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                             DataIconPlaceHolder
                         </Style.ObjectCardItemSubItem>
                         <Style.ObjectCardItemSubItem>
-                        {(this.props.smartObject.actions || []).map(action =>
-                            <Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>
-                                {action.name}
-                            </Button>
-                        )}
-                    </Style.ObjectCardItemSubItem>
-                    {/*<ul>{smartObject.ip}</ul>*/}
-                    {/*<ul>{smartObject.port}</ul>*/}
+                            {(this.props.smartObject.actions || []).map(action =>
+                                <Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>
+                                    {action.name}
+                                </Button>
+                            )}
+                         </Style.ObjectCardItemSubItem>
                     </Style.ObjectCardItemLastItemTwoParts>
                 </Style.ObjectCardContainer>
 
@@ -83,7 +81,8 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     {this.state.expanded ? <ExpansionPanelSummary /> : null}
                     <ExpansionPanelDetails>
                         <Typography>
-                            Lampe connectéeeeeee
+                            <ul>{smartObject.ip}</ul>
+                            <ul>{smartObject.port}</ul>
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
