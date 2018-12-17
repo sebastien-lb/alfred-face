@@ -1,3 +1,7 @@
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
 
 import * as React from 'react';
 
@@ -16,6 +20,21 @@ interface IObjectCardProps {
 
 
 class ObjectCard extends React.Component<IObjectCardProps, {}>  {
+    public state = {
+        expanded: false,
+    };
+
+    public handleClickLastItem() {
+        this.setState({
+          expanded: true
+        });
+    };
+
+    public onChangeExpansionPanel() {
+        this.setState({
+            expanded: false
+        });
+    }
 
     public handleAction(actionId: string) {
         this.props.onAction(actionId);
@@ -44,21 +63,31 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                             </Style.ObjectStatusDescription>
                         </Style.ObjectCardItemContent>
                     </Style.ObjectCardItem>
-                    <Style.ObjectCardItemLastItemTwoParts>
+                    <Style.ObjectCardItemLastItemTwoParts onClick={() => this.handleClickLastItem()}>
                         <Style.ObjectCardItemSubItem>
                             DataIconPlaceHolder
                         </Style.ObjectCardItemSubItem>
                         <Style.ObjectCardItemSubItem>
-                            {(this.props.smartObject.actions || []).map(action =>
-                                <Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>
-                                    {action.name}
-                                </Button>
-                            )}
-                        </Style.ObjectCardItemSubItem>
-                        {/*<ul>{smartObject.ip}</ul>*/}
-                        {/*<ul>{smartObject.port}</ul>*/}
+                        {(this.props.smartObject.actions || []).map(action =>
+                            <Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>
+                                {action.name}
+                            </Button>
+                        )}
+                    </Style.ObjectCardItemSubItem>
+                    {/*<ul>{smartObject.ip}</ul>*/}
+                    {/*<ul>{smartObject.port}</ul>*/}
                     </Style.ObjectCardItemLastItemTwoParts>
                 </Style.ObjectCardContainer>
+
+                <ExpansionPanel expanded={this.state.expanded} onChange={(event, expanded) => this.onChangeExpansionPanel()}>
+                    {this.state.expanded ? <ExpansionPanelSummary /> : null}
+                    <ExpansionPanelDetails>
+                        <Typography>
+                            Lampe connectéeeeeee
+                        </Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+
             </Card>
         );
     }
