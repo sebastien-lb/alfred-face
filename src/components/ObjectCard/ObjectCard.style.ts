@@ -10,35 +10,68 @@ const ObjectCardContainer = styled.div`
     background: ${COLOR.light2};
 `;
 
-const ObjectCardItemTitle = styled.span`
-    padding-bottom: 0.3rem;
-    font-weight: bold;
-`;
 
 const ObjectCardItemBase = css`
     width: 100%;
     border-right: 1px solid #e0e0e0;
     min-height: 100px;
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     padding: 0.3rem;
-`
+`;
 
 const ObjectCardItem = styled.div`
     ${ObjectCardItemBase}
 `;
 
 const ObjectCardItemLastItem = styled.div`
-    ${ObjectCardItemBase}
+    ${ObjectCardItemBase};
     border-right: none;
 `;
 
+const ObjectCardItemLastItemTwoParts = styled.div`
+    ${ObjectCardItemBase};
+    flex-direction: row;
+`;
+
+const ObjectCardItemSubItem = styled.div`
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &:first-child {
+        border-right: 0.8px dashed #c3c3c3;
+    }
+`;
+
+const ObjectCardItemContent = styled.div`
+    text-align: center;
+    margin: auto;
+`;
+
+const ObjectCardItemTitle = styled.h4`
+    padding-bottom: 0.3rem;
+    font-weight: bold;
+    margin: 8px 0 0 0;
+`;
+
+const ObjectStatusDescription = styled.p`
+    font-style: italic;
+    font-size: small;
+    margin: 0 auto 0 0;
+`;
 
 export const Style = {
     ObjectCardContainer,
     ObjectCardItem,
+    ObjectCardItemContent,
     ObjectCardItemLastItem,
-    ObjectCardItemTitle
-}
+    ObjectCardItemLastItemTwoParts,
+    ObjectCardItemSubItem,
+    ObjectCardItemTitle,
+    ObjectStatusDescription
+};
