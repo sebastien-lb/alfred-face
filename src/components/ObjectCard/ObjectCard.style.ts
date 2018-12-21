@@ -20,6 +20,9 @@ const ObjectCardItemBase = css`
     align-items: center;
     justify-content: flex-start;
     padding: 0.3rem;
+    svg {
+        font-size: 3rem;
+    }
 `;
 
 const ObjectCardItem = styled.div`
