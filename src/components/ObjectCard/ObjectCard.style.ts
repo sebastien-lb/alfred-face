@@ -29,11 +29,6 @@ const ObjectCardItem = styled.div`
     ${ObjectCardItemBase}
 `;
 
-const ObjectCardItemLastItem = styled.div`
-    ${ObjectCardItemBase};
-    border-right: none;
-`;
-
 const ObjectCardItemLastItemTwoParts = styled.div`
     ${ObjectCardItemBase};
     flex-direction: row;
@@ -72,7 +67,6 @@ export const Style = {
     ObjectCardContainer,
     ObjectCardItem,
     ObjectCardItemContent,
-    ObjectCardItemLastItem,
     ObjectCardItemLastItemTwoParts,
     ObjectCardItemSubItem,
     ObjectCardItemTitle,

@@ -87,8 +87,9 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     {this.state.expanded ? <ExpansionPanelSummary /> : null}
                     <ExpansionPanelDetails>
                         <Typography>
-                            <ul>{smartObject.ip}</ul>
-                            <ul>{smartObject.port}</ul>
+                            <span>{smartObject.ip}</span>
+                            <br />
+                            <span>{smartObject.port}</span>
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
