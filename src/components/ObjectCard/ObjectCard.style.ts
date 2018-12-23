@@ -44,6 +44,9 @@ const ObjectCardItemSubItem = styled.div`
     &:first-child {
         border-right: 0.8px dashed #c3c3c3;
     }
+    svg {
+        cursor: pointer;
+    }
 `;
 
 const ObjectCardItemContent = styled.div`

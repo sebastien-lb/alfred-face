@@ -14,7 +14,11 @@ export enum ActionTypes {
 
     PERFORM_ACTION_REQUEST = 'PERFORM_ACTION_REQUEST',
     PERFORM_ACTION_SUCCESS = 'PERFORM_ACTION_SUCCESS',
-    PERFORM_ACTION_FAILURE = 'PERFORM_ACTION_FAILURE'
+    PERFORM_ACTION_FAILURE = 'PERFORM_ACTION_FAILURE',
+
+    FETCH_SMART_OBJECT_STATE_FAILURE = 'FETCH_SMART_OBJECT_STATE_FAILURE',
+    FETCH_SMART_OBJECT_STATE_SUCCESS = 'FETCH_SMART_OBJECT_STATE_SUCCESS',
+    FETCH_SMART_OBJECT_STATE_REQUEST = 'FETCH_SMART_OBJECT_STATE_REQUEST'
 }
 
 export interface IAddSmartObjectRequestPayload {
@@ -40,6 +44,16 @@ export interface IPerformActionRequestPayload {
     token: string;
 }
 
+export interface IFetchSmartObjectStateRequest {
+    smartObjectId: string;
+    token: string;
+}
+
+export interface IFetchSmartObjectStateSuccess {
+    smartObjectId: string;
+    data: {[dataSourceId: string]: any};
+}
+
 export const SMART_OBJECT_ACTIONS = {
     fetchAllSmartObjectsFailure: () => createAction(ActionTypes.FETCH_ALL_SMART_OBJECTS_FAILURE),
     fetchAllSmartObjectsRequest: (payload: IFetchAllSmartObjectsRequestPayload) => createAction(ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST, payload),
@@ -51,7 +65,11 @@ export const SMART_OBJECT_ACTIONS = {
 
     performActionFailure: () => createAction(ActionTypes.PERFORM_ACTION_FAILURE),
     performActionRequest: (payload: IPerformActionRequestPayload) => createAction(ActionTypes.PERFORM_ACTION_REQUEST, payload),
-    performActionSuccess: () => createAction(ActionTypes.PERFORM_ACTION_SUCCESS)
+    performActionSuccess: () => createAction(ActionTypes.PERFORM_ACTION_SUCCESS),
+
+    fetchSmartObjectsStateFailure: () => createAction(ActionTypes.FETCH_SMART_OBJECT_STATE_FAILURE),
+    fetchSmartObjectsStateRequest: (payload: IFetchSmartObjectStateRequest) => createAction(ActionTypes.FETCH_SMART_OBJECT_STATE_REQUEST, payload),
+    fetchSmartObjectsStateSuccess: (payload: IFetchSmartObjectStateSuccess) => createAction(ActionTypes.FETCH_SMART_OBJECT_STATE_SUCCESS, payload)
 }
 
 export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<A[keyof A]>;

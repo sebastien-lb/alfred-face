@@ -46,7 +46,8 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
     public render() {
         const smartObject = this.props.smartObject;
-        const dataSource: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
+        const dataSource = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0] : null;
+        const dataSourceName: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
         return (
             <Card >
                 <Style.ObjectCardContainer>
@@ -61,15 +62,15 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                         <Style.ObjectCardItemTitle>{this.props.category}</Style.ObjectCardItemTitle>
                         <Style.ObjectCardItemContent>
                             <p>
-                                {dataSource}
+                                {dataSourceName}
                             </p>
                             <Style.ObjectStatusDescription>
-                                Status
+                                Status: {String(dataSource ? dataSource.latest_value : null)}
                             </Style.ObjectStatusDescription>
                         </Style.ObjectCardItemContent>
                     </Style.ObjectCardItem>
-                    <Style.ObjectCardItemLastItemTwoParts onClick={() => this.handleClickLastItem()}>
-                        <Style.ObjectCardItemSubItem>
+                    <Style.ObjectCardItemLastItemTwoParts>
+                        <Style.ObjectCardItemSubItem onClick={() => this.handleClickLastItem()}>
                             {/* DataIconPlaceHolder */}
                             <InsertChartIcon />
                         </Style.ObjectCardItemSubItem>
@@ -87,9 +88,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     {this.state.expanded ? <ExpansionPanelSummary /> : null}
                     <ExpansionPanelDetails>
                         <Typography>
-                            <span>{smartObject.ip}</span>
-                            <br />
-                            <span>{smartObject.port}</span>
+                            Lorem Ipsum 
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>

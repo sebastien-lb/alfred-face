@@ -1,6 +1,6 @@
 import { Actions, ActionTypes } from './actions';
 
-import { ISmartObjectStore } from '../../interfaces';
+import { ISmartObject, ISmartObjectStore } from '../../interfaces';
 
 export function smartObjectReducer(state: ISmartObjectStore = {}, action: Actions): ISmartObjectStore {
     let isAddingSmartObjectRequest: boolean;
@@ -10,7 +10,7 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
     let isLoadingError: boolean;
 
     switch (action.type) {
-        // SERIES fetch
+        // Smart Object fetch
         case ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST:
             isLoadingError = false;
             return { ...state, isLoadingError};
@@ -45,6 +45,27 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
             return { ...state, };
         case ActionTypes.PERFORM_ACTION_FAILURE:
             return { ...state, };
+
+        // SmartObject State retreive
+        case ActionTypes.FETCH_SMART_OBJECT_STATE_REQUEST:
+            return {...state, };
+        case ActionTypes.FETCH_SMART_OBJECT_STATE_SUCCESS:
+            const smartObjectId: string = action.payload!.smartObjectId;
+            const data = action.payload!.data;
+            const smartObjects: ISmartObject[] = (state.smartObjects || []).map((object: ISmartObject) => {
+                if (object.id === smartObjectId) {
+                    const dataSources = (object.dataSources || []).map((source) => {
+                            return {...source, latest_value: data[source.id].value};
+                    });
+                    return {...object, dataSources};
+                }
+                return object;
+            });
+
+            return {...state, smartObjects};
+        case ActionTypes.FETCH_SMART_OBJECT_STATE_FAILURE:
+            return {...state, };
+
 
         default:
             return {...state, };

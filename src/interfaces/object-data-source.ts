@@ -6,5 +6,7 @@ export interface IDataSource {
     endpoint?: string;
     entrypoint?: string;
     data_polling_type: string;
-    smart_object: string;
+    // is it really usefull ? 
+    // smart_object: string;
+    latest_value?: any;
 }

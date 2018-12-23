@@ -6,7 +6,8 @@ import { Api } from './api';
 
 export function* fetchAllSmartObjectsRequest(params: any): Iterator<any> {
     try {
-        const rep = yield call(Api.fetchAllSmartObjectsRequest, params.payload.token);
+        const token = params.payload.token
+        const rep = yield call(Api.fetchAllSmartObjectsRequest, token);
         let data = rep.data;
         // // add missing value from api
         data = data.map((item: any): ISmartObject => ({
@@ -18,6 +19,10 @@ export function* fetchAllSmartObjectsRequest(params: any): Iterator<any> {
             port: item.port
         }));
         yield put(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsSuccess({ smartObjects: data }));
+
+        if (data.length) {
+            yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsStateRequest({smartObjectId: data[0].id, token}));
+        }
     } catch (error) {
         yield put(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsFailure());
     }
@@ -41,9 +46,19 @@ export function* performActionRequest(params: any): Iterator<any> {
     }
 }
 
+export function* retreiveSmartObjectState(params: any): Iterator<any> {
+    try {
+        const rep = yield call(Api.retreiveSmartObjectState, params.payload.smartObjectId, params.payload.token);
+        const data = rep.data;
+        yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsStateSuccess({smartObjectId: params.payload.smartObjectId, data}));
+    } catch (error) {
+        yield put(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsFailure());
+    }
+}
+
 export function* smartObjectSaga(): Iterator<any> {
     yield takeEvery(ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST, fetchAllSmartObjectsRequest);
     yield takeEvery(ActionTypes.ADD_REQUEST, addSmartObjectRequest);
     yield takeEvery(ActionTypes.PERFORM_ACTION_REQUEST, performActionRequest);
-
+    yield takeEvery(ActionTypes.FETCH_SMART_OBJECT_STATE_REQUEST, retreiveSmartObjectState);
 }
