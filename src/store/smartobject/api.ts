@@ -34,8 +34,21 @@ const performActionRequest = async (actionId: string, token: string) => {
     return rep;
 }
 
+const retreiveSmartObjectState = async (smartObjectId: string, token: string) => {
+
+    const url = BACK_URL + '/objectState';
+    const rep = await axios.get(url, {
+        headers: {
+            'Authorization': 'Token ' + token
+        },
+        params: {smart_object_id: smartObjectId}, 
+    });
+    return rep;
+}
+
 export const Api = {
     addSmartObjectRequest,
     fetchAllSmartObjectsRequest,
-    performActionRequest
+    performActionRequest,
+    retreiveSmartObjectState
 };
