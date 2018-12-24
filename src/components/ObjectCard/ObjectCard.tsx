@@ -30,7 +30,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
     public handleClickLastItem() {
         this.setState({
-          expanded: true
+          expanded: !this.state.expanded
         });
     };
 
@@ -88,7 +88,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     {this.state.expanded ? <ExpansionPanelSummary /> : null}
                     <ExpansionPanelDetails>
                         <Typography>
-                            Lorem Ipsum 
+                            Lorem Ipsum
                         </Typography>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
