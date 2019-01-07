@@ -23,10 +23,10 @@ const addSmartObjectRequest = async (name: string, ip: string, port: string, tok
     return rep;
 }
 
-const performActionRequest = async (actionId: string, token: string) => {
+const performActionRequest = async (actionId: string, payload: any, token: string) => {
 
     const url = BACK_URL + '/performAction';
-    const rep = await axios.post(url, { action_id: actionId}, {
+    const rep = await axios.post(url, { action_id: actionId, payload }, {
         headers: {
             'Authorization': 'Token ' + token
         }

@@ -39,7 +39,7 @@ export function* addSmartObjectRequest(params: any): Iterator<any> {
 
 export function* performActionRequest(params: any): Iterator<any> {
     try {
-        yield call(Api.performActionRequest, params.payload.actionId, params.payload.token);
+        yield call(Api.performActionRequest, params.payload.actionId, params.payload.payload, params.payload.token);
         yield put(SMART_OBJECT_ACTIONS.performActionSuccess());
     } catch (error) {
         yield put(SMART_OBJECT_ACTIONS.performActionFailure());
