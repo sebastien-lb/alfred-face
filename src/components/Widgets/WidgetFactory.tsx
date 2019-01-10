@@ -11,7 +11,7 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
 
     const dataToSendType: DataType = action.payload;
     console.log("widget factory", currentState, action, onChange);
-    if(currentState === undefined) {
+    if(currentState === undefined && dataToSendType !== null) {
         return null;
     }
     switch(dataToSendType) {
