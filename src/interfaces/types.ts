@@ -1,0 +1,1 @@
+export type DataType = 'boolean' | 'list' | null;

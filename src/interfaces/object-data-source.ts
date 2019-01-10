@@ -1,8 +1,10 @@
+import { DataType } from './types';
+
 export interface IDataSource {
     id: string;
     name: string;
     description: string;
-    data_type: string;
+    data_type: DataType;
     endpoint?: string;
     entrypoint?: string;
     data_polling_type: string;
