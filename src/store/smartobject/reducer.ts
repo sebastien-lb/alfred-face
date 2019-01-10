@@ -55,7 +55,7 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
             const smartObjects: ISmartObject[] = (state.smartObjects || []).map((object: ISmartObject) => {
                 if (object.id === smartObjectId) {
                     const dataSources = (object.dataSources || []).map((source) => {
-                            return {...source, latest_value: data[source.id].value};
+                            return {...source, latest_value: data[source.id] ? data[source.id].value : undefined};
                     });
                     return {...object, dataSources};
                 }

@@ -2,23 +2,33 @@ import * as React from 'react';
 
 import { Toggle } from './Toogle';
 
-// import Switch from '@material-ui/core/Switch';
+import Button from '@material-ui/core/Button';
 
 
-import { DataType } from '../../interfaces';
+import { DataType, IObjectAction } from '../../interfaces';
 
-export function widgetFactory(currentState: any, dataToSendType: DataType, onChange: (a: any) => void): any {
+export function widgetFactory(currentState: any, action: IObjectAction, onChange: (a?: any) => void): any {
 
-    console.log("widget factory", currentState, dataToSendType);
+    const dataToSendType: DataType = action.payload;
+    console.log("widget factory", currentState, action, onChange);
     if(currentState === undefined) {
         return null;
     }
     switch(dataToSendType) {
         case 'boolean':
             return  <Toggle status={currentState} onChange={(a: boolean) => onChange(a)}/>;
-            // return <Switch checked={currentState} onChange={(event: any) => true}/>;
+
         case 'list':
             return null;
+
+        // Action without payload are simple buttons
+        case null:
+            return (
+                <Button color="primary" size={"small"} onClick={() => onChange()} key={action.id}>
+                        {action.name}
+                </Button>
+            );
+
         default:
             return null;
     }

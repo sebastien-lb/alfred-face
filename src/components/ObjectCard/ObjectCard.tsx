@@ -49,7 +49,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
     public render() {
         const smartObject = this.props.smartObject;
         const dataSource = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0] : null;
-        const action = smartObject.actions && smartObject.actions.length ? smartObject.actions[0] : null;
+        // const action = smartObject.actions && smartObject.actions.length ? smartObject.actions[0] : null;
         const dataSourceName: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
         return (
             <Card >
@@ -57,7 +57,6 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     <Style.ObjectCardItem>
                         <Style.ObjectCardItemTitle>{smartObject.name}</Style.ObjectCardItemTitle>
                         <Style.ObjectCardItemContent>
-                            {/* ObjectIconPlaceHolder */}
                             <CategoryIcon />
                         </Style.ObjectCardItemContent>
                     </Style.ObjectCardItem>
@@ -74,16 +73,15 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     </Style.ObjectCardItem>
                     <Style.ObjectCardItemLastItemTwoParts>
                         <Style.ObjectCardItemSubItem onClick={() => this.handleClickLastItem()}>
-                            {/* DataIconPlaceHolder */}
                             <InsertChartIcon />
                         </Style.ObjectCardItemSubItem>
                         <Style.ObjectCardItemSubItem>
-                            {/*{(this.props.smartObject.actions || []).map(action =>*/}
-                                {/*<Button color="primary" size={"small"} onClick={() => this.handleAction(action.id)} key={action.id}>*/}
-                                    {/*{action.name}*/}
-                                {/*</Button>*/}
-                            {/*)}*/}
-                            {widgetFactory(dataSource ? dataSource.latest_value : null, dataSource ? dataSource.data_type : null, (payload) => this.handleAction(action!.id, payload))}
+                            {(this.props.smartObject.actions || []).map(action =>
+                                // FIND STATE CORRESPONDING TO ACTION ::: dataSource ? dataSource.latest_value : null
+                                <div key={action.id}>
+                                    {widgetFactory(true, action, (payload) => this.handleAction(action!.id, payload))}
+                                </div>
+                            )}
                          </Style.ObjectCardItemSubItem>
                     </Style.ObjectCardItemLastItemTwoParts>
                 </Style.ObjectCardContainer>
