@@ -57,13 +57,25 @@ export function* retreiveSmartObjectState(params: any): Iterator<any> {
         const data = rep.data;
         yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsStateSuccess({smartObjectId: params.payload.smartObjectId, data}));
     } catch (error) {
-        yield put(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsFailure());
+        yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsStateFailure());
     }
 }
+
+export function* retreiveSmartObjectHistory(params: any): Iterator<any> {
+    try {
+        const rep = yield call(Api.retreiveSmartObjectHistory, params.payload.smartObjectId, params.payload.token);
+        const data = rep.data;
+        yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsHistorySuccess({smartObjectId: params.payload.smartObjectId, history: data}));
+    } catch (error) {
+        yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsHistoryFailure());
+    }
+}
+
 
 export function* smartObjectSaga(): Iterator<any> {
     yield takeEvery(ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST, fetchAllSmartObjectsRequest);
     yield takeEvery(ActionTypes.ADD_REQUEST, addSmartObjectRequest);
     yield takeEvery(ActionTypes.PERFORM_ACTION_REQUEST, performActionRequest);
     yield takeEvery(ActionTypes.FETCH_SMART_OBJECT_STATE_REQUEST, retreiveSmartObjectState);
+    yield takeEvery(ActionTypes.FETCH_SMART_OBJECT_HISTORY_REQUEST, retreiveSmartObjectHistory);
 }
