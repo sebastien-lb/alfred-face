@@ -11,6 +11,8 @@ import storage from 'redux-persist/lib/storage';
 import { smartObjectReducer, smartObjectSaga } from '../store/smartobject';
 import { userReducer, userSaga } from '../store/user';
 
+import { scenarioReducer, scenarioSaga} from '../store/scenarios'
+
 const sagaMiddleware = createSagaMiddleware();
 
 const persistConfig = {
@@ -20,8 +22,9 @@ const persistConfig = {
 
 const rootReducer = connectRouter(history)(
     combineReducers({
+        scenarioReducer,
         smartObjectReducer,
-        userReducer
+        userReducer,
     }));
 
 const pReducer = persistReducer(persistConfig, rootReducer);
@@ -39,3 +42,4 @@ export const persistor = persistStore(store);
 
 sagaMiddleware.run(smartObjectSaga);
 sagaMiddleware.run(userSaga);
+sagaMiddleware.run(scenarioSaga);

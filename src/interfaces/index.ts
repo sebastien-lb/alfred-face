@@ -6,3 +6,5 @@ export * from './user';
 export * from './store/user-state';
 export * from './object-data-source';
 export * from './types';
+export * from './scenario';
+export * from './store/scenario-state';

@@ -38,6 +38,11 @@
     "typescript": "^3.1.6"
   },
   "jest": {
-    "coverageReporters": ["json", "lcov", "text", "clover"]
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover"
+    ]
   }
 }
