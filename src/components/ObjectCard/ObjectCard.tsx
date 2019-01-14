@@ -79,7 +79,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                         <Style.ObjectCardItemSubItem>
                             {(this.props.smartObject.actions || []).map(action =>
                                 // FIND STATE CORRESPONDING TO ACTION ::: dataSource ? dataSource.latest_value : null
-                                <div key={action.id}>
+                                <div key={`${action.id}-${dataSource ? dataSource.latest_value : null}`}>
                                     {widgetFactory(dataSource ? dataSource.latest_value : null, action, (payload) => this.handleAction(action!.id, payload))}
                                 </div>
                             )}
