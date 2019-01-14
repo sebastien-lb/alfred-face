@@ -16,7 +16,7 @@ const mapStateToProps = (state: IStore) => {
 const mapDispatchToProps = (dispatch:any) => ({
     addSmartObjectRequest: (name: string, ip: string, port: string, token: string) => dispatch(SMART_OBJECT_ACTIONS.addSmartObjectRequest({ name, ip, port, token })),
     fetchAllSmartObjectsRequest: (token: string) => dispatch(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsRequest({ token })),
-    performActionRequest: (actionId: string, payload: any, token: string) => dispatch(SMART_OBJECT_ACTIONS.performActionRequest({actionId, payload, token})),
+    performActionRequest: (actionId: string, payload: any, token: string, smartObjectId?: string) => dispatch(SMART_OBJECT_ACTIONS.performActionRequest({actionId, payload, token, smartObjectId})),
 });
 
 

@@ -40,6 +40,7 @@ export interface IFetchAllSmartObjectsSuccess {
 }
 
 export interface IPerformActionRequestPayload {
+    smartObjectId?: string;
     actionId: string;
     payload: any;
     token: string;

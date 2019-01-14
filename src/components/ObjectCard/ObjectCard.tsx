@@ -43,6 +43,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
     }
 
     public handleAction(actionId: string, payload: any) {
+        console.log("action handled, payload:", payload);
         this.props.onAction(actionId, payload);
     }
 
