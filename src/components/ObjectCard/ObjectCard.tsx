@@ -17,6 +17,7 @@ import Card from '@material-ui/core/Card';
 import CategoryIcon from '@material-ui/icons/Category';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 
+import {Line} from 'react-chartjs-2';
 
 interface IObjectCardProps {
     smartObject: ISmartObject;
@@ -52,6 +53,34 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
         const dataSource = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0] : null;
         // const action = smartObject.actions && smartObject.actions.length ? smartObject.actions[0] : null;
         const dataSourceName: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
+        
+        const chardata = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [
+              {
+                label: 'My First dataset',
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: 'rgba(75,192,192,0.4)',
+                borderColor: 'rgba(75,192,192,1)',
+                // borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                // borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(75,192,192,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+                pointHoverBorderColor: 'rgba(220,220,220,1)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: [65, 59, 80, 81, 56, 55, 40]
+              }
+            ]
+          };
+          
         return (
             <Card >
                 <Style.ObjectCardContainer>
@@ -93,6 +122,9 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                         <Typography>
                             Lorem Ipsum
                         </Typography>
+
+                        <Line data={chardata} />
+
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
 
