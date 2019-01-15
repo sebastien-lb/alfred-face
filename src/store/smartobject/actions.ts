@@ -1,5 +1,5 @@
 import { ActionCreatorsMapObject } from 'redux';
-import { ISmartObject } from '../../interfaces';
+import { IDataPoint, ISmartObject } from '../../interfaces';
 import { createAction } from '../utils';
 
 // Actions type
@@ -67,7 +67,7 @@ export interface IFetchSmartObjectHistoryRequest {
 
 export interface IFetchSmartObjectHistorySuccess {
     smartObjectId: string;
-    history: {[dataSourceId: string]: {value: any, timestamp: Date}}; 
+    history: {[dataSourceId: string]: IDataPoint[]}; 
 }
 
 export const SMART_OBJECT_ACTIONS = {

@@ -22,6 +22,7 @@ export function* fetchAllSmartObjectsRequest(params: any): Iterator<any> {
 
         if (data.length) {
             yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsStateRequest({smartObjectId: data[0].id, token}));
+            yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsHistoryRequest({smartObjectId:  data[0].id, token}));
         }
     } catch (error) {
         yield put(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsFailure());

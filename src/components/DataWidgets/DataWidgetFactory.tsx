@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { LineChart } from './LineChart/LineChart';
 
-import { DataType, IDataSource } from '../../interfaces';
+import { DataType, IDataPoint, IDataSource } from '../../interfaces';
 
 
 interface IDataWidgetFactoryProps {
@@ -21,6 +21,13 @@ export class DataWidgetFactory extends React.Component<IDataWidgetFactoryProps, 
         switch(dataType) {
 
             case 'boolean':
+
+                if (this.props.data && this.props.data.length) {
+                    return <LineChart title="Title" 
+                        data={this.props.data.map((a: IDataPoint) => a.value)} 
+                        labels={this.props.data.map((a: IDataPoint) => a.timestamp)}
+                        />;
+                }
                 return <LineChart title="Title" data={[12,23, 3]} labels={["oui","non", "yes"]}/>;
 
             default:

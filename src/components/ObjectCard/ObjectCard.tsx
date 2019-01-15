@@ -93,7 +93,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
 
                         {(this.props.smartObject.dataSources || []).map(source => 
                             <div key={`${source.id}`}>
-                                <DataWidgetFactory dataSource={source} data={true}/>
+                                <DataWidgetFactory dataSource={source} data={source.history || source.latest_value || undefined}/>
                             </div>
                         )}
 
