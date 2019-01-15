@@ -17,7 +17,7 @@ import Card from '@material-ui/core/Card';
 import CategoryIcon from '@material-ui/icons/Category';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 
-import { LineChart } from '../LineChart/LineChart';
+import { DataWidgetFactory } from '../DataWidgets';
 
 interface IObjectCardProps {
     smartObject: ISmartObject;
@@ -91,7 +91,11 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     {this.state.expanded ? <ExpansionPanelSummary /> : null}
                     <ExpansionPanelDetails>
 
-                        <LineChart title="Title" data={[12,23, 3]} labels={["oui","non", "yes"]}/>
+                        {(this.props.smartObject.dataSources || []).map(source => 
+                            <div key={`${source.id}`}>
+                                <DataWidgetFactory dataSource={source} data={true}/>
+                            </div>
+                        )}
 
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
