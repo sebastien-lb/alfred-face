@@ -1,3 +1,4 @@
+import { IDataPoint } from './data-point';
 import { DataType } from './types';
 
 export interface IDataSource {
@@ -11,4 +12,5 @@ export interface IDataSource {
     // is it really usefull ? 
     // smart_object: string;
     latest_value?: any;
+    history?: IDataPoint[];
 }

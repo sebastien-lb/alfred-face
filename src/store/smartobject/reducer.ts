@@ -8,6 +8,8 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
     let isAddingSmartObjectSuccess: boolean;
     
     let isLoadingError: boolean;
+    let smartObjectId: string;
+    let smartObjects: ISmartObject[];
 
     switch (action.type) {
         // Smart Object fetch
@@ -50,9 +52,9 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
         case ActionTypes.FETCH_SMART_OBJECT_STATE_REQUEST:
             return {...state, };
         case ActionTypes.FETCH_SMART_OBJECT_STATE_SUCCESS:
-            const smartObjectId: string = action.payload!.smartObjectId;
+            smartObjectId = action.payload!.smartObjectId;
             const data = action.payload!.data;
-            const smartObjects: ISmartObject[] = (state.smartObjects || []).map((object: ISmartObject) => {
+            smartObjects = (state.smartObjects || []).map((object: ISmartObject) => {
                 if (object.id === smartObjectId) {
                     const dataSources = (object.dataSources || []).map((source) => {
                             return {...source, latest_value: data[source.id] ? data[source.id].value : undefined};
@@ -64,6 +66,26 @@ export function smartObjectReducer(state: ISmartObjectStore = {}, action: Action
 
             return {...state, smartObjects};
         case ActionTypes.FETCH_SMART_OBJECT_STATE_FAILURE:
+            return {...state, };
+
+        // History retreive
+        case ActionTypes.FETCH_SMART_OBJECT_HISTORY_REQUEST:
+            return {...state, };
+        case ActionTypes.FETCH_SMART_OBJECT_HISTORY_SUCCESS:
+            smartObjectId = action.payload!.smartObjectId;
+            const history = action.payload!.history;
+            smartObjects = (state.smartObjects || []).map((object: ISmartObject) => {
+                if (object.id === smartObjectId) {
+                    const dataSources = (object.dataSources || []).map((source) => {
+                            return {...source, history: history[source.id] ? history[source.id] : undefined};
+                    });
+                    return {...object, dataSources};
+                }
+                return object;
+            });
+
+            return {...state, smartObjects};
+        case ActionTypes.FETCH_SMART_OBJECT_HISTORY_FAILURE:
             return {...state, };
 
 

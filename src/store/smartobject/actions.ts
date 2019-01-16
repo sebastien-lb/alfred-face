@@ -1,5 +1,5 @@
 import { ActionCreatorsMapObject } from 'redux';
-import { ISmartObject } from '../../interfaces';
+import { IDataPoint, ISmartObject } from '../../interfaces';
 import { createAction } from '../utils';
 
 // Actions type
@@ -18,7 +18,11 @@ export enum ActionTypes {
 
     FETCH_SMART_OBJECT_STATE_FAILURE = 'FETCH_SMART_OBJECT_STATE_FAILURE',
     FETCH_SMART_OBJECT_STATE_SUCCESS = 'FETCH_SMART_OBJECT_STATE_SUCCESS',
-    FETCH_SMART_OBJECT_STATE_REQUEST = 'FETCH_SMART_OBJECT_STATE_REQUEST'
+    FETCH_SMART_OBJECT_STATE_REQUEST = 'FETCH_SMART_OBJECT_STATE_REQUEST',
+
+    FETCH_SMART_OBJECT_HISTORY_FAILURE = 'FETCH_SMART_OBJECT_HISTORY_FAILURE',
+    FETCH_SMART_OBJECT_HISTORY_SUCCESS = 'FETCH_SMART_OBJECT_HISTORY_SUCCESS',
+    FETCH_SMART_OBJECT_HISTORY_REQUEST = 'FETCH_SMART_OBJECT_HISTORY_REQUEST'
 }
 
 export interface IAddSmartObjectRequestPayload {
@@ -56,6 +60,16 @@ export interface IFetchSmartObjectStateSuccess {
     data: {[dataSourceId: string]: any};
 }
 
+export interface IFetchSmartObjectHistoryRequest {
+    smartObjectId: string;
+    token: string;
+}
+
+export interface IFetchSmartObjectHistorySuccess {
+    smartObjectId: string;
+    history: {[dataSourceId: string]: IDataPoint[]}; 
+}
+
 export const SMART_OBJECT_ACTIONS = {
     fetchAllSmartObjectsFailure: () => createAction(ActionTypes.FETCH_ALL_SMART_OBJECTS_FAILURE),
     fetchAllSmartObjectsRequest: (payload: IFetchAllSmartObjectsRequestPayload) => createAction(ActionTypes.FETCH_ALL_SMART_OBJECTS_REQUEST, payload),
@@ -71,7 +85,11 @@ export const SMART_OBJECT_ACTIONS = {
 
     fetchSmartObjectsStateFailure: () => createAction(ActionTypes.FETCH_SMART_OBJECT_STATE_FAILURE),
     fetchSmartObjectsStateRequest: (payload: IFetchSmartObjectStateRequest) => createAction(ActionTypes.FETCH_SMART_OBJECT_STATE_REQUEST, payload),
-    fetchSmartObjectsStateSuccess: (payload: IFetchSmartObjectStateSuccess) => createAction(ActionTypes.FETCH_SMART_OBJECT_STATE_SUCCESS, payload)
+    fetchSmartObjectsStateSuccess: (payload: IFetchSmartObjectStateSuccess) => createAction(ActionTypes.FETCH_SMART_OBJECT_STATE_SUCCESS, payload),
+
+    fetchSmartObjectsHistoryFailure: () => createAction(ActionTypes.FETCH_SMART_OBJECT_HISTORY_FAILURE),
+    fetchSmartObjectsHistoryRequest: (payload: IFetchSmartObjectHistoryRequest) => createAction(ActionTypes.FETCH_SMART_OBJECT_HISTORY_REQUEST, payload),
+    fetchSmartObjectsHistorySuccess: (payload: IFetchSmartObjectHistorySuccess) => createAction(ActionTypes.FETCH_SMART_OBJECT_HISTORY_SUCCESS, payload)
 }
 
 export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<A[keyof A]>;
