@@ -3,15 +3,15 @@ import * as React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 
-import { IObjectAction, IScenarioCondition } from '../../interfaces';
+import { IObjectAction, } from '../../interfaces'; // IScenarioCondition 
 
 import {Add} from '@material-ui/icons/';
 
-import { ScenarioCondition } from 'src/components';
+// import { ScenarioCondition } from 'src/components';
 
 interface IScenarioAddState {
     name: string;
-    conditions: IScenarioCondition[];
+    conditions: any[];
     actions: IObjectAction[];
 }
 
@@ -58,7 +58,7 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                         {(this.state.conditions || []).map((value, index) => {
                             return <div key={index}>{value}</div>;
                         })}
-                        <ScenarioCondition />
+                        {/* <ScenarioCondition /> */}
                     </div>
                 </div>
                 <div className="AddScenarioForm-Acitons">
