@@ -1,1 +1,1 @@
-export type DataType = 'boolean' | 'list' | null;
+export type DataType = 'boolean' | 'list' | 'string' | null;

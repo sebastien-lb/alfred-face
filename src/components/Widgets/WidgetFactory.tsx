@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { Toggle } from './Toogle';
 
+import { default as Text } from './Text';
+
 import Button from '@material-ui/core/Button';
 
 
@@ -19,6 +21,11 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
 
         case 'list':
             return null;
+
+        case 'string':
+
+            return <Text status={currentState} onChange={(a: string) => onChange(a)}/>;
+
 
         // Action without payload are simple buttons
         case null:
