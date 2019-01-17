@@ -16,11 +16,14 @@ class Selector extends React.Component<ISelectorProps, ISelectorState> {
 
     constructor(props: ISelectorProps) {
         super(props);
+        console.log(this.props.values)
         const selectedValueId = this.props.values[0].id;
         const selectedValueName = this.props.values[0].name;
-        this.setState( {selectedValueId, selectedValueName});
+        this.state = {selectedValueId, selectedValueName};
     }
-    public handleSelect(value:any){
+    public handleSelect(ev:any){
+        const id = ev.target.value;
+        const value = this.props.values.filter((v)=> v.id === id)[0];
         console.log("Value selected");
         console.log(value);
         const selectedValueId = value.id;
@@ -29,11 +32,12 @@ class Selector extends React.Component<ISelectorProps, ISelectorState> {
     }
 
     public render() {
+        console.log(this.state);
         return (
             <div>
                 <InputLabel>{this.props.name}</InputLabel>
                 <Select onChange={(v) => this.handleSelect(v)}
-                    value={this.state.selectedValueName}>
+                    value={this.state!.selectedValueName}>
                     {(this.props.values || []).map(value =>
                         <MenuItem key={value.id} value={value.id}>{value.name}</MenuItem>
                     )}
