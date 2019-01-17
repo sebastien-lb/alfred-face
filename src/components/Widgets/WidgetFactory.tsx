@@ -12,8 +12,6 @@ import { DataType, IObjectAction } from '../../interfaces';
 export function widgetFactory(currentState: any, action: IObjectAction, onChange: (a?: any) => void): any {
 
     const dataToSendType: DataType = action.payload;
-    console.log("widget factory", currentState, action, onChange);
-    console.log(dataToSendType);
     if(currentState === undefined && dataToSendType !== null) {
         return null;
     }
