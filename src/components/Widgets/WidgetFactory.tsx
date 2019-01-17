@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { Toggle } from './Toogle';
 
+import { Text } from './Text';
+
 import Button from '@material-ui/core/Button';
 
 
@@ -11,6 +13,7 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
 
     const dataToSendType: DataType = action.payload;
     console.log("widget factory", currentState, action, onChange);
+    console.log(dataToSendType);
     if(currentState === undefined && dataToSendType !== null) {
         return null;
     }
@@ -20,6 +23,11 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
 
         case 'list':
             return null;
+
+        case 'string':
+
+            return <Text status={currentState} onChange={(a: string) => onChange(a)}/>;
+
 
         // Action without payload are simple buttons
         case null:
