@@ -6,13 +6,13 @@ import styled from 'styled-components';
 import { Styled } from './Header.style';
 
 import AppBar from '@material-ui/core/AppBar';
-// import IconButton from '@material-ui/core/IconButton';
-// import Menu from '@material-ui/core/Menu';
-// import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 
 // import ErrorIcon from '@material-ui/icons/Error';
-// import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@material-ui/icons/Menu';
 
 
 interface IHeaderState {
@@ -22,6 +22,8 @@ interface IHeaderState {
 
 interface IHeaderProps {
     className?: string;
+    goToDashboard: () => void;
+    goToScenarios: () => void;
 }
 
 
@@ -40,11 +42,21 @@ class Header extends React.Component<IHeaderProps, IHeaderState>  {
         this.setState({open: true, anchorEl: event.currentTarget});
     }
 
+    public pushDashboard(){
+        this.props.goToDashboard();
+        this.handleClose();
+    }
+
+    public pushScenarios(){
+        this.props.goToScenarios();
+        this.handleClose();
+    }
+
     public render() {
         return (
             <AppBar position="static" className={this.props.className}>
                 <Toolbar className="ToolBar">
-                    {/* <IconButton 
+                    <IconButton 
                         color="inherit" 
                         aria-label="Menu"
                         onClick={(event) => this.handleMenu(event)}
@@ -67,9 +79,9 @@ class Header extends React.Component<IHeaderProps, IHeaderState>  {
                         open={this.state.open}
                         onClose={() => this.handleClose()}
                     >
-                        <MenuItem onClick={() => this.handleClose()}>Profile</MenuItem>
-                        <MenuItem onClick={() => this.handleClose()}>My account</MenuItem>
-                    </Menu> */}
+                        <MenuItem onClick={() => this.pushDashboard()}>Dashboard</MenuItem>
+                        <MenuItem onClick={() => this.pushScenarios()}>Scenario</MenuItem>
+                    </Menu>
                     <Styled.AppTitle >
                         Alfred
                     </Styled.AppTitle>

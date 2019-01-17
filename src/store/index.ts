@@ -13,6 +13,8 @@ import { userReducer, userSaga } from '../store/user';
 
 import { scenarioReducer, scenarioSaga} from '../store/scenarios'
 
+import { headerReducer, headerSaga} from '../store/header';
+
 const sagaMiddleware = createSagaMiddleware();
 
 const persistConfig = {
@@ -22,6 +24,7 @@ const persistConfig = {
 
 const rootReducer = connectRouter(history)(
     combineReducers({
+        headerReducer,
         scenarioReducer,
         smartObjectReducer,
         userReducer,
@@ -43,3 +46,4 @@ export const persistor = persistStore(store);
 sagaMiddleware.run(smartObjectSaga);
 sagaMiddleware.run(userSaga);
 sagaMiddleware.run(scenarioSaga);
+sagaMiddleware.run(headerSaga);
