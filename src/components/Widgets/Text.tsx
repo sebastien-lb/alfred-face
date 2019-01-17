@@ -1,8 +1,11 @@
 import * as React from 'react';
 
+import styled from 'styled-components';
+
 import { Button, TextField } from '@material-ui/core';
 
 interface ITextProps {
+    className?: string;
     status: string;
     onChange: (status: string) => void;
 }
@@ -11,7 +14,7 @@ interface ITextState {
     status: string;
 }
 
-export class Text extends React.Component<ITextProps, ITextState> {
+class Text extends React.Component<ITextProps, ITextState> {
 
     constructor(props: ITextProps){
         super(props);
@@ -31,7 +34,7 @@ export class Text extends React.Component<ITextProps, ITextState> {
     public render() {
         console.log('text render', this.props.status, this.state.status);
         return (
-            <div>
+            <div className={this.props.className}>
             <TextField
                 value={this.state.status}
                 onChange={(event: any) => this.handleChange(event)} />
@@ -40,3 +43,13 @@ export class Text extends React.Component<ITextProps, ITextState> {
         );
     }
 }
+
+
+const StyledText = styled(Text)`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
+export default StyledText;

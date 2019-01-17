@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Toggle } from './Toogle';
 
-import { Text } from './Text';
+import { default as Text } from './Text';
 
 import Button from '@material-ui/core/Button';
 
