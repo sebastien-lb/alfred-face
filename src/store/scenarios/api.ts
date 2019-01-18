@@ -22,8 +22,12 @@ const fetchAllScenariosRequest = async (token: string) => {
 }
 
 const fetchAllOperators = async (token: string) => {
-    // const url = BACK_URL;
-    const rep: any = [{name: "GT", id: "qwe", allowedTypes: ["boolean"]}];
+    const url = BACK_URL + "operator/?format=json";
+    const rep = await axios.get(url, {
+        headers: {
+            'Authorization': 'Token ' + token
+        }
+    });
     return rep;
 }
 

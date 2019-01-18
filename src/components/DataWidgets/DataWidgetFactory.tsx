@@ -26,6 +26,7 @@ export class DataWidgetFactory extends React.Component<IDataWidgetFactoryProps, 
                     return <LineChart title="Title" 
                         data={this.props.data.map((a: IDataPoint) => a.value)} 
                         labels={this.props.data.map((a: IDataPoint) => a.timestamp)}
+                        isTime={true}
                         />;
                 }
                 return <LineChart title="Title" data={[12,23, 3]} labels={["oui","non", "yes"]}/>;
