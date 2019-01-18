@@ -7,7 +7,7 @@ const SelectorContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-width: 100px;
+    min-width: 200px;
     width: 20%;
 `;
 
