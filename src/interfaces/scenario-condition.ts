@@ -1,4 +1,4 @@
-import {IDataSource} from './object-data-source';
+import { IDataSource } from './object-data-source';
 
 export interface IScenarioCondition {
     id: string;

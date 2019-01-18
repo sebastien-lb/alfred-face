@@ -2,9 +2,14 @@ import * as React from 'react';
 
 import { InputLabel, MenuItem, Select } from '@material-ui/core';
 
+import { Style } from './Selector.style';
+
+
 interface ISelectorProps {
     name: string;
     values: any[];
+    forceValue?: string;
+    onChange?: (id: string) => void; 
 }
 
 interface ISelectorState {
@@ -29,19 +34,23 @@ class Selector extends React.Component<ISelectorProps, ISelectorState> {
         const selectedValueId = value.id;
         const selectedValueName = value.name
         this.setState({selectedValueId, selectedValueName});
+        if (this.props.onChange) {
+            this.props.onChange(selectedValueId);
+        }
     }
 
     public render() {
+        console.log("render", this.state);
         return (
-            <div>
+            <Style.SelectorContainer>
                 <InputLabel>{this.props.name}</InputLabel>
-                <Select onChange={(v) => this.handleSelect(v)}
-                    value={this.state!.selectedValueName}>
+                <Select key={"sel-" + this.state.selectedValueId} onChange={(v) => this.handleSelect(v)}
+                    value={this.state.selectedValueId}>
                     {(this.props.values || []).map(value =>
                         <MenuItem key={value.id} value={value.id}>{value.name}</MenuItem>
                     )}
                 </Select>
-            </div>
+            </Style.SelectorContainer>
         );
     }
 }

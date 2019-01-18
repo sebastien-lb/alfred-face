@@ -21,7 +21,14 @@ const fetchAllScenariosRequest = async (token: string) => {
     return rep;
 }
 
+const fetchAllOperators = async (token: string) => {
+    // const url = BACK_URL;
+    const rep: any = [{name: "GT", id: "qwe", allowedTypes: ["boolean"]}];
+    return rep;
+}
+
 export const Api = {
     addScenarioRequest,
+    fetchAllOperators,
     fetchAllScenariosRequest,
 };
