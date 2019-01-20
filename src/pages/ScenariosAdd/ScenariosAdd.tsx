@@ -114,7 +114,7 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                 <Style.SectionFormContainer>
                     <span>Actions</span>
                     <IconButton color="primary" onClick={()=>this.handleAddAction()}><Add /></IconButton>
-                    <div className="AddScenarioForm-ActionContainer">
+                    <Style.CardsContainer>
                         {(this.state.actions || []).map((actionState, index) => 
                             <Style.CardContainer key={index}>
                                 <Card>
@@ -129,7 +129,7 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                                 </Card>
                             </Style.CardContainer>
                         )}
-                    </div>
+                    </Style.CardsContainer>
                 </Style.SectionFormContainer>
             </Style.AddScenarioFormContainer>
         )
