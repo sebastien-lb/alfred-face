@@ -8,8 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 
 import { Add } from '@material-ui/icons/';
 
-import { ScenarioCondition } from 'src/components';
-import { DataType, IDataSource, IOperator, ISmartObject } from 'src/interfaces';
+import { ScenarioCondition } from '../../components';
+import { DataType, IDataSource, IOperator, ISmartObject } from '../../interfaces';
 
 import { Style } from './ScenarioAdd.style';
 
