@@ -57,7 +57,7 @@ class ScenarioCondition extends React.Component<IScenarioConditionProps, IScenar
                 {this.state.datasource && this.state.objectId &&this.props.datasource && this.props.operator && this.props.operator.length ? 
                     [
                         <Selector key={this.props.operator[0].name + "sel"} name="Operator" values={this.props.operator} />,
-                        <TextField key={this.props.operator[0].name + "tf"} name="Value" />
+                        <TextField key={this.props.operator[0].name + "tf"} label="Value" />
                     ]
                 : null }
             </Style.ConditionContainer>

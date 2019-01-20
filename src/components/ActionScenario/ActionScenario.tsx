@@ -52,7 +52,7 @@ class ActionScenario extends React.Component<IActionScenarioProps, IActionScenar
                 {this.state.objectId && this.props.actions && this.props.actions.length ?
                     [
                         <Selector key={this.props.actions[0].name + "sel"} name="Action" values={this.props.actions} onChange={(id: string) => this.handleChangeAction(id)}/>,
-                        <TextField key={this.props.actions[0].name + "tf"} name="Payload" />
+                        this.state.action && this.state.action.payload ? <TextField key={this.props.actions[0].name + "tf"} label="Payload" /> : null
                     ]
                 : null }
             </Style.ConditionContainer>

@@ -3,10 +3,11 @@ import * as React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import { Add } from '@material-ui/icons/';
+import { Add, Delete } from '@material-ui/icons/';
 
 import { ActionScenario, ScenarioCondition } from '../../components';
 import { DataType, IDataSource, IObjectAction, IOperator, ISmartObject } from '../../interfaces';
@@ -50,8 +51,11 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     }
 
     public handleAddCondition() {
-        console.log("new condition");
         this.setState({conditions: [...this.state.conditions, {}]});
+    }
+
+    public handleDeleteCondition(indexCondition: number) {
+        this.setState({conditions: this.state.conditions.filter((c, index) => index !== indexCondition)});
     }
 
     public handleConditionChange(indexCondition: number, objectId: string, datasource?: IDataSource, operatorId?: string, value?: string) {
@@ -75,8 +79,15 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     }
 
     public handleAddAction() {
-        console.log("new action");
         this.setState({actions: [...this.state.actions, {}]});
+    }
+
+    public handleDeleteAction(indexAction: number) {
+        this.setState({actions: this.state.actions.filter((c, index) => index !== indexAction)});
+    }
+
+    public handleCreateScenario() {
+        console.log("Create new scenario");
     }
 
     public render() {
@@ -94,7 +105,7 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                     <IconButton color="primary" onClick={()=>this.handleAddCondition()}><Add /></IconButton>
                     <Style.CardsContainer>
                         {(this.state.conditions || []).map((condition, index) => 
-                            <Style.CardContainer key={index}>
+                            <Style.CardContainer key={`${index}`}>
                                 <Card>
                                     <CardContent>
                                         <ScenarioCondition 
@@ -105,6 +116,7 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                                                 this.handleConditionChange(index, objectId, datasource, operatorId, value)
                                             }/>
                                     </CardContent>
+                                    <IconButton color="secondary" onClick={()=>this.handleDeleteCondition(index)}><Delete /></IconButton>
                                 </Card>
                             </Style.CardContainer>
                         )}
@@ -116,7 +128,7 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                     <IconButton color="primary" onClick={()=>this.handleAddAction()}><Add /></IconButton>
                     <Style.CardsContainer>
                         {(this.state.actions || []).map((actionState, index) => 
-                            <Style.CardContainer key={index}>
+                            <Style.CardContainer key={`${index}`}>
                                 <Card>
                                     <CardContent>
                                         <ActionScenario 
@@ -126,11 +138,13 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                                                 this.handleActionChange(index, objectId, action, payload)
                                             }/>
                                     </CardContent>
+                                    <IconButton color="secondary" onClick={()=>this.handleDeleteAction(index)}><Delete /></IconButton>
                                 </Card>
                             </Style.CardContainer>
                         )}
                     </Style.CardsContainer>
                 </Style.SectionFormContainer>
+                <Button color="primary" onClick={() => this.handleCreateScenario()} >Create Scenario</Button>
             </Style.AddScenarioFormContainer>
         )
     }
