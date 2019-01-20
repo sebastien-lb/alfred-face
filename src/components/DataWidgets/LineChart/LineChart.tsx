@@ -7,7 +7,6 @@ interface ILineChartProps {
     data: number[];
     labels: string[];
     title: string;
-    isTime?: boolean;
 }
 
 
@@ -42,20 +41,21 @@ export class LineChart extends React.Component<ILineChartProps, {}>  {
                 }
             ],
         };
+        const chartOptions: chartjs.ChartOptions = {
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    }
+                }]
+            }
+        };
         return (
             <div>
                 <Line height={200} width={500} data={chardata} 
-                    options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            xAxes: [{
-                                type: 'time',
-                                time: {
-                                    unit: 'month'
-                                }
-                            }]
-                        }
-                    }}/>
+                    options={chartOptions}/>
             </div>
         );
     }

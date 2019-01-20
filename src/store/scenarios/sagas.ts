@@ -34,7 +34,8 @@ export function* addScenarioRequest(params: any): Iterator<any> {
 export function* fetchAllOperator(params: any): Iterator<any> {
     try {
         const rep = yield call(Api.fetchAllOperators, params.payload.token);
-        yield put(SCENARIO_ACTIONS.fetchAllOperatorsSuccess({operators: rep.data}));
+        const data = rep.data.map((operator: any) => ({...operator, allowedTypes: operator.allowed_types}));
+        yield put(SCENARIO_ACTIONS.fetchAllOperatorsSuccess({operators: data}));
     } catch (error) {
         yield put(SCENARIO_ACTIONS.fetchAllOperatorsFailure());
     }
