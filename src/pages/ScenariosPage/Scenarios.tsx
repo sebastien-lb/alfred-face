@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Redirect} from 'react-router-dom';
 
+import { Style } from './Scenarios.style';
+
 import Button from '@material-ui/core/Button';
 
 interface IScenariosPageState {
@@ -15,6 +17,10 @@ class ScenariosPage extends React.Component<{}, IScenariosPageState> {
         };
     }
 
+    public loadScenarios(){
+        console.log("load scenarios here");
+    }
+
     public handleAddScenario() {
         this.setState({
             shouldRedirect: true,
@@ -23,13 +29,16 @@ class ScenariosPage extends React.Component<{}, IScenariosPageState> {
 
     public render() {
         return (
-            <div id="Scenarios">
+            <Style.ScenarioPageContainer id="Scenarios">
+                <Style.ScenarioListContainer>
+                    <p>Hello!</p>
+                </Style.ScenarioListContainer>
                 {
                     this.state.shouldRedirect ?
                         <Redirect to="/addScenarios" push={true} />:
                         <Button color="primary" onClick={() => this.handleAddScenario()} >Add New Scenario</Button>
                 }
-            </div>
+            </Style.ScenarioPageContainer>
         )
     }
 }
