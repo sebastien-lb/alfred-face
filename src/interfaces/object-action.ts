@@ -5,4 +5,5 @@ export interface IObjectAction {
     name: string;
     command: string;
     payload: DataType;
+    important?: boolean;
 }
