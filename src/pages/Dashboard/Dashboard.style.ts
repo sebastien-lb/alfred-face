@@ -12,7 +12,7 @@ const AddSensorForm = styled.form`
     }
 `;
 
- const DashboardPageContainer = styled.div`
+const DashboardPageContainer = styled.div`
     padding: 2rem;
     background: ${COLOR.light1};
 `;

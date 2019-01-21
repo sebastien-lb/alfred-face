@@ -7,5 +7,7 @@ export * from './store/user-state';
 export * from './object-data-source';
 export * from './types';
 export * from './scenario';
+export * from './scenario-condition';
 export * from './store/scenario-state';
 export * from './data-point';
+export * from './condition-operator';

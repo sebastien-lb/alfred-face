@@ -22,7 +22,7 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
     }
 }
 
-export function* addScenarioRequest(params: any): Iterator<any>  {
+export function* addScenarioRequest(params: any): Iterator<any> {
     try {
         yield call(Api.addScenarioRequest, params.payload.name, params.payload.conditions, params.payload.actions, params.payload.token);
         yield put(SCENARIO_ACTIONS.addScenarioSuccess())
@@ -31,7 +31,18 @@ export function* addScenarioRequest(params: any): Iterator<any>  {
     }
 }
 
+export function* fetchAllOperator(params: any): Iterator<any> {
+    try {
+        const rep = yield call(Api.fetchAllOperators, params.payload.token);
+        const data = rep.data.map((operator: any) => ({...operator, allowedTypes: operator.allowed_types}));
+        yield put(SCENARIO_ACTIONS.fetchAllOperatorsSuccess({operators: data}));
+    } catch (error) {
+        yield put(SCENARIO_ACTIONS.fetchAllOperatorsFailure());
+    }
+}
+
 export function* scenarioSaga(): Iterator<any> {
     yield takeEvery(ActionTypes.ADD_SCENARIO, addScenarioRequest);
     yield takeEvery(ActionTypes.FETCH_ALL_SCENARIO_REQUEST, fetchAllScenarioRequest);
+    yield takeEvery(ActionTypes.FETCH_ALL_OPERATORS_REQUEST, fetchAllOperator);
 }

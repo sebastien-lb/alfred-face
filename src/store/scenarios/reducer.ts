@@ -21,6 +21,15 @@ export function scenarioReducer(state: IScenarioStore = {}, action: Actions): IS
             isAddingScenarioError = true;
             return {...state, isAddingScenarioError, isAddingScenarioRequest};
 
+        // FETCH OPERATORS
+        case ActionTypes.FETCH_ALL_OPERATORS_FAILURE:
+            return {...state, };
+        case ActionTypes.FETCH_ALL_OPERATORS_SUCCESS:
+            return {...state, operators: action.payload!.operators};
+        case ActionTypes.FETCH_ALL_OPERATORS_REQUEST:
+            return {...state, };
+
+
         case ActionTypes.FETCH_ALL_SCENARIO_FAILURE:
             isLoading = false;
             isLoadingError = true;
