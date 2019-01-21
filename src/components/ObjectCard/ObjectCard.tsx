@@ -49,12 +49,12 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
     }
 
     public getTopActionToRender() {
-        if (!(this.props.smartObject.actions && this.props.smartObject.actions)) {
+        if (!(this.props.smartObject.actions && this.props.smartObject.actions.length)) {
             return null
         }
-        const importantAction = this.props.smartObject.actions.filter(action => !!action.important);
-        if (importantAction.length > 0){
-            return importantAction[0]
+        const importantActions = this.props.smartObject.actions.filter(action => !!action.important);
+        if (importantActions.length){
+            return importantActions[0]
         }
         else {
             return this.props.smartObject.actions[0]
