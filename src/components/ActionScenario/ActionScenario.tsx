@@ -43,6 +43,13 @@ class ActionScenario extends React.Component<IActionScenarioProps, IActionScenar
         }
     }
 
+    public handleChangePayload(payload: string) {
+        this.setState({ payload });
+        if (this.props.onChange) {
+            this.props.onChange(this.state.objectId, this.state.action, payload);
+        }
+    }
+
     public render(){
         return (
             <Style.ConditionContainer>
@@ -52,7 +59,9 @@ class ActionScenario extends React.Component<IActionScenarioProps, IActionScenar
                 {this.state.objectId && this.props.actions && this.props.actions.length ?
                     [
                         <Selector key={this.props.actions[0].name + "sel"} name="Action" values={this.props.actions} onChange={(id: string) => this.handleChangeAction(id)}/>,
-                        this.state.action && this.state.action.payload ? <TextField key={this.props.actions[0].name + "tf"} label="Payload" /> : null
+                        this.state.action && this.state.action.payload ?
+                        <TextField key={this.props.actions[0].name + "tf"} label="Payload"
+                                onChange={(ev) => this.handleChangePayload(ev.target.value)}/> : null
                     ]
                 : null }
             </Style.ConditionContainer>

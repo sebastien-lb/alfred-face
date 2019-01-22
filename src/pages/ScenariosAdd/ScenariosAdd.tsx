@@ -27,6 +27,7 @@ interface IScenarioAddProps {
     getDatasourcesForSmartObject: (objectId: string) => IDataSource[];
     getOperatorForDataType: (type: DataType) => IOperator[];
     fetchOperators: (token: string) => void;
+    createScenarioRequest: (name: string, actions: any, conditions: any, token: string) => void;
 }
 
 class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddState> {
@@ -87,13 +88,13 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     }
 
     public handleCreateScenario() {
-        console.log("Create new scenario");
+        this.props.createScenarioRequest(this.state.name, this.state.actions, this.state.conditions, this.props.userToken ? this.props.userToken : '');
     }
 
     public render() {
         return (
             <Style.AddScenarioFormContainer>
-                <TextField 
+                <TextField
                     id="name"
                     value={this.state.name}
                     label={'Scenario Name'}
@@ -104,15 +105,15 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                     <span>Conditions</span>
                     <IconButton color="primary" onClick={()=>this.handleAddCondition()}><Add /></IconButton>
                     <Style.CardsContainer>
-                        {(this.state.conditions || []).map((condition, index) => 
+                        {(this.state.conditions || []).map((condition, index) =>
                             <Style.CardContainer key={`${index}`}>
                                 <Card>
                                     <CardContent>
-                                        <ScenarioCondition 
+                                        <ScenarioCondition
                                             objectValue={this.props.smartObjects}
                                             datasource={condition.objectId ? this.props.getDatasourcesForSmartObject(condition.objectId) : undefined}
                                             operator={condition.datasource ? this.props.getOperatorForDataType(condition.datasource.data_type) : undefined}
-                                            onChange={(objectId: string, datasource?: IDataSource, operatorId?: string, value?: string) => 
+                                            onChange={(objectId: string, datasource?: IDataSource, operatorId?: string, value?: string) =>
                                                 this.handleConditionChange(index, objectId, datasource, operatorId, value)
                                             }/>
                                     </CardContent>
@@ -120,21 +121,21 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
                                 </Card>
                             </Style.CardContainer>
                         )}
-                        
+
                     </Style.CardsContainer>
                 </Style.SectionFormContainer>
                 <Style.SectionFormContainer>
                     <span>Actions</span>
                     <IconButton color="primary" onClick={()=>this.handleAddAction()}><Add /></IconButton>
                     <Style.CardsContainer>
-                        {(this.state.actions || []).map((actionState, index) => 
+                        {(this.state.actions || []).map((actionState, index) =>
                             <Style.CardContainer key={`${index}`}>
                                 <Card>
                                     <CardContent>
-                                        <ActionScenario 
+                                        <ActionScenario
                                             objectValue={this.props.smartObjects}
                                             actions={actionState.objectId ? this.props.getActionsForSmartObject(actionState.objectId) : undefined}
-                                            onChange={(objectId: string, action?: IObjectAction, payload?: string) => 
+                                            onChange={(objectId: string, action?: IObjectAction, payload?: string) =>
                                                 this.handleActionChange(index, objectId, action, payload)
                                             }/>
                                     </CardContent>

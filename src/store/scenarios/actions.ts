@@ -1,5 +1,5 @@
 import { ActionCreatorsMapObject } from 'redux';
-import { IOperator, IScenario } from '../../interfaces';
+import { IOperator } from '../../interfaces';
 import { createAction } from '../utils';
 
 export enum ActionTypes {
@@ -17,7 +17,10 @@ export enum ActionTypes {
 }
 
 export interface IAddScenarioPayload {
-    scenario: IScenario;
+    name: string;
+    conditions: any[];
+    actions: any[];
+    token: string;
 }
 
 export interface IFetchScenarioPayload {
