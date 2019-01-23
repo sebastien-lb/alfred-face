@@ -66,7 +66,13 @@ const ObjectStatusDescription = styled.p`
     margin: 0 auto 0 0;
 `;
 
+const ExpansionPanelContent = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const Style = {
+    ExpansionPanelContent,
     ObjectCardContainer,
     ObjectCardItem,
     ObjectCardItemContent,

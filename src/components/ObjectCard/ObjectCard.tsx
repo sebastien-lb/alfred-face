@@ -104,18 +104,20 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                 <ExpansionPanel expanded={this.state.expanded} onChange={(event, expanded) => this.onChangeExpansionPanel()}>
                     {this.state.expanded ? <ExpansionPanelSummary /> : null}
                     <ExpansionPanelDetails>
-                        Data Sources
-                        {(this.props.smartObject.dataSources || []).map(source => 
-                            <div key={`${source.id}`}>
-                                <DataWidgetFactory dataSource={source} data={source.history || source.latest_value || undefined}/>
-                            </div>
-                        )}
-                        Actions
-                        {(this.props.smartObject.actions || []).filter(action => action !== topActionToRender).map(action =>
-                            <div key={`${action.id}-${dataSource ? dataSource.latest_value : null}`}>
-                                {widgetFactory(dataSource ? dataSource.latest_value : null, action, (payload) => this.handleAction(action!.id, payload))}
-                            </div>
-                        )}
+                        <Style.ExpansionPanelContent>
+                            Data Sources
+                            {(this.props.smartObject.dataSources || []).map(source => 
+                                <div key={`${source.id}`}>
+                                    <DataWidgetFactory dataSource={source} data={source.history || source.latest_value || undefined}/>
+                                </div>
+                            )}
+                            Actions
+                            {(this.props.smartObject.actions || []).filter(action => action !== topActionToRender).map(action =>
+                                <div key={`${action.id}-${dataSource ? dataSource.latest_value : null}`}>
+                                    {widgetFactory(dataSource ? dataSource.latest_value : null, action, (payload) => this.handleAction(action!.id, payload))}
+                                </div>
+                            )}
+                        </Style.ExpansionPanelContent>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
 
