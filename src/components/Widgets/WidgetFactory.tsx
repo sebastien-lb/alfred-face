@@ -5,7 +5,7 @@ import { Toggle } from './Toogle';
 import { default as Text } from './Text';
 
 import Button from '@material-ui/core/Button';
-import { SketchPicker } from 'react-color';
+import { HuePicker } from 'react-color';
 
 import { DataType, IObjectAction } from '../../interfaces';
 
@@ -25,7 +25,7 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
         case 'color':
             const colorRGB = JSON.parse(currentState)
             return <div>
-                    <SketchPicker color={colorRGB} onChangeComplete={(color) => {currentState = color.rgb;}} />
+                    <HuePicker color={colorRGB} onChangeComplete={(color) => {currentState = color.rgb;}} />
                     <Button color="primary" size={"small"} onClick={() => onChange(currentState)} key={action.id}>
                         Validate
                     </Button>
