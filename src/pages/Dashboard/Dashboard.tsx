@@ -63,7 +63,7 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
                         <Style.ObjectCardContainer key={`${smartObject.id}`}>
                             <ObjectCard 
                                 smartObject={smartObject} 
-                                category={"Lamp"} 
+                                category={"Category"} 
                                 onAction={(actionId, payload) => this.props.performActionRequest(actionId, payload, this.props.userToken, smartObject.id)}/>
                         </Style.ObjectCardContainer>
                     )}
