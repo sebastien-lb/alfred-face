@@ -19,9 +19,6 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
         case 'boolean':
             return  <Toggle status={currentState} onChange={(a: boolean) => onChange(a)}/>;
 
-        case 'list':
-            return null;
-
         case 'string':
 
             return <Text status={currentState} onChange={(a: string) => onChange(a)}/>;

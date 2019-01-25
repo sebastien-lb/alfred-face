@@ -6,7 +6,7 @@ import { DataType, IDataSource, IObjectAction, IOperator, ISmartObject, IStore }
 
 import { SCENARIO_ACTIONS } from '../../store/scenarios';
 
-const mapStateToProps = (state: IStore) => {
+const mapStateToProps = (state: IStore, dispatch: any) => {
     return {
         userToken: state.userReducer.user ? state.userReducer.user.token : null,
         smartObjects: state.smartObjectReducer.smartObjects,
@@ -30,6 +30,7 @@ const mapStateToProps = (state: IStore) => {
 
 const mapDispatchToProps = (dispatch:any) => ({
     fetchOperators: (token: string) => dispatch(SCENARIO_ACTIONS.fetchAllOperatorsRequest({token})),
+    createScenarioRequest: (name: string, actions: any, conditions: any, token: string) => dispatch(SCENARIO_ACTIONS.addScenarioRequest({ name, actions, conditions, token })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScenariosAddPage);

@@ -20,8 +20,8 @@ export class DataWidgetFactory extends React.Component<IDataWidgetFactoryProps, 
         console.log("render data widget", dataType, this.props.dataSource, this.props.data);
         switch(dataType) {
 
+            case 'number': 
             case 'boolean':
-
                 if (this.props.data && this.props.data.length) {
                     return <LineChart title="Title" 
                         data={this.props.data.map((a: IDataPoint) => a.value)} 

@@ -48,10 +48,24 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
         this.props.onAction(actionId, payload);
     }
 
+    public getTopActionToRender() {
+        if (!(this.props.smartObject.actions && this.props.smartObject.actions.length)) {
+            return null
+        }
+        const importantActions = this.props.smartObject.actions.filter(action => !!action.important);
+        if (importantActions.length){
+            return importantActions[0]
+        }
+        else {
+            return this.props.smartObject.actions[0]
+        }
+    }
+
     public render() {
         const smartObject = this.props.smartObject;
         const dataSource = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0] : null;
         const dataSourceName: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
+        const topActionToRender = this.getTopActionToRender();
           
         return (
             <Card >
@@ -78,11 +92,11 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                             <InsertChartIcon />
                         </Style.ObjectCardItemSubItem>
                         <Style.ObjectCardItemSubItem>
-                            {(this.props.smartObject.actions || []).map(action =>
-                                <div key={`${action.id}-${dataSource ? dataSource.latest_value : null}`}>
-                                    {widgetFactory(dataSource ? dataSource.latest_value : null, action, (payload) => this.handleAction(action!.id, payload))}
+                            { topActionToRender ?
+                                <div key={`${topActionToRender.id}-${dataSource ? dataSource.latest_value : null}`}>
+                                    {widgetFactory(dataSource ? dataSource.latest_value : null, topActionToRender, (payload) => this.handleAction(topActionToRender!.id, payload))}
                                 </div>
-                            )}
+                            : null}
                          </Style.ObjectCardItemSubItem>
                     </Style.ObjectCardItemLastItemTwoParts>
                 </Style.ObjectCardContainer>
@@ -90,13 +104,20 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                 <ExpansionPanel expanded={this.state.expanded} onChange={(event, expanded) => this.onChangeExpansionPanel()}>
                     {this.state.expanded ? <ExpansionPanelSummary /> : null}
                     <ExpansionPanelDetails>
-
-                        {(this.props.smartObject.dataSources || []).map(source => 
-                            <div key={`${source.id}`}>
-                                <DataWidgetFactory dataSource={source} data={source.history || source.latest_value || undefined}/>
-                            </div>
-                        )}
-
+                        <Style.ExpansionPanelContent>
+                            Data Sources
+                            {(this.props.smartObject.dataSources || []).map(source => 
+                                <div key={`${source.id}`}>
+                                    <DataWidgetFactory dataSource={source} data={source.history || source.latest_value || undefined}/>
+                                </div>
+                            )}
+                            Actions
+                            {(this.props.smartObject.actions || []).filter(action => action !== topActionToRender).map(action =>
+                                <div key={`${action.id}-${dataSource ? dataSource.latest_value : null}`}>
+                                    {widgetFactory(dataSource ? dataSource.latest_value : null, action, (payload) => this.handleAction(action!.id, payload))}
+                                </div>
+                            )}
+                        </Style.ExpansionPanelContent>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
 

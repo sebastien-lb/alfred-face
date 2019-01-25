@@ -24,7 +24,21 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
 
 export function* addScenarioRequest(params: any): Iterator<any> {
     try {
-        yield call(Api.addScenarioRequest, params.payload.name, params.payload.conditions, params.payload.actions, params.payload.token);
+
+        const actionIds = params.payload.actions.map((item: any): any => ({
+            action_id: item.action.id,
+            payload: item.payload ? item.payload : ''
+        }));
+
+        const conditions = params.payload.conditions.map((item: any): any => ({
+            operator_id: item.operatorId,
+            data_source_id: item.datasource.id,
+            value: item.value
+        }));
+
+        console.log(conditions);
+
+        yield call(Api.addScenarioRequest, params.payload.name, conditions, actionIds, params.payload.token);
         yield put(SCENARIO_ACTIONS.addScenarioSuccess())
     } catch (error) {
         yield put(SCENARIO_ACTIONS.addScenarioFailure());

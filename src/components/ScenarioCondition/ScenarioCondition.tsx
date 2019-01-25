@@ -45,6 +45,20 @@ class ScenarioCondition extends React.Component<IScenarioConditionProps, IScenar
         }
     }
 
+    public handleChangeOperator(operatorId: string) {
+        this.setState({ operatorId });
+        if (this.props.onChange) {
+            this.props.onChange(this.state.objectId, this.state.datasource, operatorId, this.state.value);
+        }
+    }
+
+    public handleChangeValue(value: string) {
+        this.setState({ value });
+        if (this.props.onChange) {
+            this.props.onChange(this.state.objectId, this.state.datasource, this.state.operatorId, value);
+        }
+    }
+
     public render(){
         return (
             <Style.ConditionContainer>
@@ -54,10 +68,10 @@ class ScenarioCondition extends React.Component<IScenarioConditionProps, IScenar
                 {this.state.objectId && this.props.datasource && this.props.datasource.length ?
                     <Selector name="DataSource" values={this.props.datasource} onChange={(id: string) => this.handleChangeDatasource(id)}/>
                 : null }
-                {this.state.datasource && this.state.objectId &&this.props.datasource && this.props.operator && this.props.operator.length ? 
+                {this.state.datasource && this.state.objectId &&this.props.datasource && this.props.operator && this.props.operator.length ?
                     [
-                        <Selector key={this.props.operator[0].name + "sel"} name="Operator" values={this.props.operator} />,
-                        <TextField key={this.props.operator[0].name + "tf"} label="Value" />
+                        <Selector key={this.props.operator[0].name + "sel"} name="Operator" values={this.props.operator} onChange={(operatorId: string) => this.handleChangeOperator(operatorId)} />,
+                        <TextField key={this.props.operator[0].name + "tf"} label="Value" onChange={(ev) => this.handleChangeValue(ev.target.value)}/>
                     ]
                 : null }
             </Style.ConditionContainer>

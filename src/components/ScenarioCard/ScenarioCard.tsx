@@ -26,18 +26,12 @@ class ScenarioCard extends React.Component<IScenarioCardProps, {}> {
                     </Typography>
                     <Style.ScenarioActionsAndConditionContainer>
                         <Style.ScenarioConditionsContainer>
-                            {(this.props.scenario.conditions || []).map((condition: IScenarioCondition) => {
-                                return <ConditionCard />;
+                            {(this.props.scenario.conditions || []).map((condition: IScenarioCondition, index: number) => {
+                                return <ConditionCard key={index} condition={condition}/>;
                             })}
                         </Style.ScenarioConditionsContainer>
                         <Style.ScenarioActionsContainer>
-                            {(this.props.scenario.objectActions || [].map((key) => {
-                                if (this.props.scenario.objectActions) {
-                                    return <div>{this.props.scenario.objectActions.find(key)}</div>;
-                                } else {
-                                    return null;
-                                }
-                            }))}
+                            <div>Hello</div>
                         </Style.ScenarioActionsContainer>
                     </Style.ScenarioActionsAndConditionContainer>
                 </CardContent>
