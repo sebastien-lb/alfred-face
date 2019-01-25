@@ -111,7 +111,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                                     <DataWidgetFactory dataSource={source} data={source.history || source.latest_value || undefined}/>
                                 </div>
                             )}
-                            Actions
+                            {this.props.smartObject.actions && this.props.smartObject.actions.length ?  <p>Actions</p>  : null}
                             {(this.props.smartObject.actions || []).filter(action => action !== topActionToRender).map(action =>
                                 <div key={`${action.id}-${dataSource ? dataSource.latest_value : null}`}>
                                     {widgetFactory(dataSource ? dataSource.latest_value : null, action, (payload) => this.handleAction(action!.id, payload))}
