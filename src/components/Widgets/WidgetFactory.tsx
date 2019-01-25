@@ -23,13 +23,20 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
             return <Text status={currentState} onChange={(a: string) => onChange(a)}/>;
 
         case 'color':
-            const colorRGB = JSON.parse(currentState)
+            let additionnalProps: any = {};
+            try {
+                const colorRGB = JSON.parse(currentState);
+                additionnalProps = {color: colorRGB};
+            } catch (error) {
+                console.log("Cannot read state value");
+            }
+
             return <div>
-                    <HuePicker color={colorRGB} onChangeComplete={(color) => {currentState = color.rgb;}} />
-                    <Button color="primary" size={"small"} onClick={() => onChange(currentState)} key={action.id}>
-                        Validate
-                    </Button>
-                </div>;
+                <HuePicker {...additionnalProps} onChangeComplete={(color) => { currentState = color.rgb; }} />
+                <Button color="primary" size={"small"} onClick={() => onChange(currentState)} key={action.id}>
+                    Validate
+                </Button>
+            </div>
 
         // Action without payload are simple buttons
         case null:
