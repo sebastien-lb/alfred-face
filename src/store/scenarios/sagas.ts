@@ -13,9 +13,9 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
         data = data.map((item: any): IScenario => ({
             id: item.id,
             name: item.name,
-            objectActions: data.actions
+            objectActions: item.actions
         }));
-        yield put(SCENARIO_ACTIONS.fetchAllScenarioSuccess());
+        yield put(SCENARIO_ACTIONS.fetchAllScenarioSuccess({scenarios: data}));
     }
     catch (error) {
         yield put(SCENARIO_ACTIONS.fetchAllScenarioFailure());

@@ -1,14 +1,24 @@
 import * as React from 'react';
 import {Redirect} from 'react-router-dom';
 
+import { IScenario } from '../../interfaces';
+
+import { ScenarioCard } from '../../components';
+
 import { Style } from './Scenarios.style';
 
 import Button from '@material-ui/core/Button';
 
+interface IScenarioPageProps {
+    token: string;
+    scenarios?: IScenario[];
+    fetchScenarios: (token: string) => void;
+}
 interface IScenariosPageState {
     shouldRedirect: boolean;
 }
-class ScenariosPage extends React.Component<{}, IScenariosPageState> {
+
+class ScenariosPage extends React.Component<IScenarioPageProps, IScenariosPageState> {
 
     constructor(props: any){
         super(props);
@@ -17,8 +27,8 @@ class ScenariosPage extends React.Component<{}, IScenariosPageState> {
         };
     }
 
-    public loadScenarios(){
-        console.log("load scenarios here");
+    public componentWillMount() {
+        this.props.fetchScenarios(this.props.token);
     }
 
     public handleAddScenario() {
@@ -31,7 +41,9 @@ class ScenariosPage extends React.Component<{}, IScenariosPageState> {
         return (
             <Style.ScenarioPageContainer id="Scenarios">
                 <Style.ScenarioListContainer>
-                    <p>Hello!</p>
+                    {(this.props.scenarios || []).map((scenario: IScenario, index: number) => {
+                        return <ScenarioCard key={index} scenario={scenario} />
+                    })}
                 </Style.ScenarioListContainer>
                 {
                     this.state.shouldRedirect ?

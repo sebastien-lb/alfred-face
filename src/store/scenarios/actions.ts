@@ -1,5 +1,5 @@
 import { ActionCreatorsMapObject } from 'redux';
-import { IOperator } from '../../interfaces';
+import { IOperator, IScenario} from '../../interfaces';
 import { createAction } from '../utils';
 
 export enum ActionTypes {
@@ -35,6 +35,10 @@ export interface IFetchOperatorsSuccessPayload {
     operators: IOperator[];
 }
 
+export interface IFetchAllScenarioSuccessPayload {
+    scenarios: IScenario[];
+}
+
 
 export const SCENARIO_ACTIONS = {
     addScenarioFailure: () => createAction(ActionTypes.ADD_SCENARIO_FAILURE),
@@ -47,7 +51,7 @@ export const SCENARIO_ACTIONS = {
 
     fetchAllScenarioFailure: () => createAction(ActionTypes.FETCH_ALL_SCENARIO_FAILURE),
     fetchAllScenarioRequest: (payload: IFetchScenarioPayload) => createAction(ActionTypes.FETCH_ALL_SCENARIO_REQUEST, payload),
-    fetchAllScenarioSuccess: () => createAction(ActionTypes.FETCH_ALL_SCENARIO_SUCCESS),
+    fetchAllScenarioSuccess: (payload: IFetchAllScenarioSuccessPayload) => createAction(ActionTypes.FETCH_ALL_SCENARIO_SUCCESS, payload),
 }
 
 export type ActionsUnion<A extends ActionCreatorsMapObject> = ReturnType<A[keyof A]>;

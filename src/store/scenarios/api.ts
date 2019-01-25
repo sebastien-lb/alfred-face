@@ -12,7 +12,7 @@ const addScenarioRequest = async (name: string, conditions: any, actions: any , 
 }
 
 const fetchAllScenariosRequest = async (token: string) => {
-    const url = BACK_URL + '/scenarios/?format=json';
+    const url = BACK_URL + '/scenario/?format=json';
     const rep = await axios.get(url, {
         headers: {
             'Authorization': 'Token ' + token
