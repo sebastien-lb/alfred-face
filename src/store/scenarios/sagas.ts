@@ -5,19 +5,56 @@ import { IScenario } from '../../interfaces'
 import { ActionTypes, SCENARIO_ACTIONS } from './actions';
 import { Api } from './api';
 
+import { IDataSource, IObjectAction, IScenarioCondition } from '../../interfaces';
+
 export function* fetchAllScenarioRequest(params:any): Iterator<any> {
     try {
         const token = params.payload.token;
         const rep = yield call(Api.fetchAllScenariosRequest, token);
         let data = rep.data;
-        data = data.map((item: any): IScenario => ({
-            id: item.id,
-            name: item.name,
-            objectActions: item.actions
-        }));
+        data = data.map((item: any): IScenario => {
+            const objectActions: {[SmartObjectId: string]: IObjectAction[]} = {};
+            item.actions.map((action: any) => {
+                const objectAction: IObjectAction = {
+                    id: action.id,
+                    name: action.name,
+                    command: action.command,
+                    payload: action.datatype,
+                    important: action.important
+                }
+                let tempActions: IObjectAction[];
+                if (objectActions[action.SmartObjectId]){
+                    tempActions = objectActions[action.SmartObjectId];
+                    tempActions = [...tempActions, objectAction];
+                }
+                tempActions = [objectAction];
+                objectActions[action.SmartObjectId] = tempActions;
+            })
+            return {
+                id: item.id,
+                name: item.name,
+                conditions: item.conditions.map((condition:any): IScenarioCondition =>{
+                    const dataSource: IDataSource = 
+                    {
+                        id: condition.data_source.id,
+                        name: condition.data_source.name,
+                        description: condition.data_source.description,
+                        data_polling_type: condition.data_source.data_polling_type,
+                        data_type: condition.data_source.data_type
+                    };
+                    const id: string = condition.id;
+                    const operator: string = condition.operator.name;
+                    const value: any = condition.value;
+                    return {id, operator, value, dataSource };
+                }),
+                objectActions,
+            };
+        });
+        console.log(data);
         yield put(SCENARIO_ACTIONS.fetchAllScenarioSuccess({scenarios: data}));
     }
     catch (error) {
+        console.log("load scenarios", error);
         yield put(SCENARIO_ACTIONS.fetchAllScenarioFailure());
     }
 }
