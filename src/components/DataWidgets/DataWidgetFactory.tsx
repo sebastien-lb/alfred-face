@@ -20,7 +20,7 @@ export class DataWidgetFactory extends React.Component<IDataWidgetFactoryProps, 
         console.log("render data widget", dataType, this.props.dataSource, this.props.data);
         switch(dataType) {
 
-            case 'number': 
+            case 'number':
             case 'boolean':
                 if (this.props.data && this.props.data.length) {
                     return <LineChart title="Title"
@@ -31,8 +31,13 @@ export class DataWidgetFactory extends React.Component<IDataWidgetFactoryProps, 
                 return <LineChart title="Title" data={[12,23, 3]} labels={["oui","non", "yes"]}/>;
 
             case 'color':
-                if (this.props.data && this.props.data.length) {
-                    return <span>{this.props.data[this.props.data.length - 1].value}</span>;
+                if (Array.isArray(this.props.data)) {
+                    return <ul>{
+                        (this.props.data || []).map((a: IDataPoint) =>
+                            <li key={`${a.timestamp}`}><span>Color: {a.value}</span></li>
+                        )
+                    }</ul>
+
                 }
 
                 return null;
