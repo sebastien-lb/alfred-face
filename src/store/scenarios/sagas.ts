@@ -15,6 +15,8 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
         data = data.map((item: any): IScenario => {
             const objectActions: {[SmartObjectId: string]: IObjectAction[]} = {};
             item.actions.map((action: any) => {
+                console.log(action);
+                action = action.action;
                 const objectAction: IObjectAction = {
                     id: action.id,
                     name: action.name,
@@ -23,13 +25,14 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
                     important: action.important
                 }
                 let tempActions: IObjectAction[];
-                if (objectActions[action.SmartObjectId]){
-                    tempActions = objectActions[action.SmartObjectId];
+                if (objectActions[action.smart_object]){
+                    tempActions = objectActions[action.smart_object];
                     tempActions = [...tempActions, objectAction];
+                } else {
+                    tempActions = [objectAction];
                 }
-                tempActions = [objectAction];
-                objectActions[action.SmartObjectId] = tempActions;
-            })
+                objectActions[action.smart_object] = tempActions;
+            });
             return {
                 id: item.id,
                 name: item.name,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IScenario, IScenarioCondition } from '../../interfaces';
+import { IObjectAction, IScenario, IScenarioCondition } from '../../interfaces';
 
 import { Style } from './ScenarioCard.style';
 
@@ -18,6 +18,14 @@ interface IScenarioCardProps {
 class ScenarioCard extends React.Component<IScenarioCardProps, {}> {
 
     public render() {
+        let actions: IObjectAction[] = [];
+        if (this.props.scenario.objectActions) {
+            for (const key of Object.keys(this.props.scenario.objectActions) ){
+                this.props.scenario.objectActions[key]!.map((value: IObjectAction) => {
+                    actions = [...actions, value];
+                });
+            }
+        }
         return (
             <Card>
                 <CardContent>
@@ -31,7 +39,11 @@ class ScenarioCard extends React.Component<IScenarioCardProps, {}> {
                             })}
                         </Style.ScenarioConditionsContainer>
                         <Style.ScenarioActionsContainer>
-                            <div>Hello</div>
+                            {
+                                (actions.map((action: IObjectAction, index: number) => {
+                                    return <div key={index}>{action.name}</div>
+                                }))
+                            }
                         </Style.ScenarioActionsContainer>
                     </Style.ScenarioActionsAndConditionContainer>
                 </CardContent>
