@@ -20,7 +20,7 @@ export class LineChart extends React.Component<ILineChartProps, {}>  {
             datasets: [
                 {
                     label: this.props.title,
-                    fill: false,
+                    fill: true,
                     lineTension: 0.1,
                     backgroundColor: 'rgba(75,192,192,0.4)',
                     borderColor: 'rgba(75,192,192,1)',
@@ -49,8 +49,15 @@ export class LineChart extends React.Component<ILineChartProps, {}>  {
                     time: {
                         unit: 'day'
                     }
-                }]
-            }
+                }],
+                yAxes: [{
+                    ticks: {
+                        max: 1,
+                        min: 0,
+                        stepSize: 1
+                }}]
+            },
+            showLines: true
         };
         return (
             <div>
