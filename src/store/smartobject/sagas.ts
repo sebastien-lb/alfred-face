@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {all, call, put, takeEvery} from 'redux-saga/effects';
 
 import { ISmartObject } from '../../interfaces';
 import { ActionTypes, SMART_OBJECT_ACTIONS } from './actions';
@@ -21,8 +21,18 @@ export function* fetchAllSmartObjectsRequest(params: any): Iterator<any> {
         yield put(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsSuccess({ smartObjects: data }));
 
         if (data.length) {
-            yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsStateRequest({smartObjectId: data[0].id, token}));
-            yield put(SMART_OBJECT_ACTIONS.fetchSmartObjectsHistoryRequest({smartObjectId:  data[0].id, token}));
+            yield all(data.map((smartObject: ISmartObject) => {
+                if (smartObject.id) {
+                    return put(SMART_OBJECT_ACTIONS.fetchSmartObjectsStateRequest({smartObjectId: smartObject.id, token}));
+                }
+                return null;
+            }));
+            yield all(data.map((smartObject: ISmartObject) => {
+                if (smartObject.id) {
+                    return put(SMART_OBJECT_ACTIONS.fetchSmartObjectsHistoryRequest({smartObjectId:  smartObject.id, token}));
+                }
+                return null;
+            }));
         }
     } catch (error) {
         yield put(SMART_OBJECT_ACTIONS.fetchAllSmartObjectsFailure());
