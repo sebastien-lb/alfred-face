@@ -57,7 +57,8 @@ export class LineChart extends React.Component<ILineChartProps, {}>  {
                         stepSize: 1
                 }}]
             },
-            showLines: true
+            showLines: true,
+            
         };
         return (
             <div>
