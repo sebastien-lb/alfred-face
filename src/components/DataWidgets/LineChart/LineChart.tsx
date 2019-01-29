@@ -55,7 +55,7 @@ export class LineChart extends React.Component<ILineChartProps, {}>  {
         };
         return (
             <div>
-                <Line height={200} width={500} data={chardata} 
+                <Line height={200} width={900} data={chardata} 
                     options={chartOptions}/>
             </div>
         );
