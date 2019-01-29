@@ -34,7 +34,7 @@ export class DataWidgetFactory extends React.Component<IDataWidgetFactoryProps, 
                 if (Array.isArray(this.props.data)) {
                     return <ul>{
                         (this.props.data || []).map((a: IDataPoint) =>
-                            <li key={`${a.timestamp}`}><span>Color: {a.value}</span></li>
+                            <li key={`${a.timestamp}`}><span>Color: {String(a.value)}</span></li>
                         )
                     }</ul>
 
