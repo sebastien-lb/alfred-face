@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 
 import { IObjectAction, IScenario } from '../../interfaces';
 
-import { ConditionCard, ScenarioDrawer } from '../../components';
+import { ActionCard, ConditionCard, ScenarioDrawer } from '../../components';
 
 import { Style } from './Scenarios.style';
 
@@ -11,7 +11,6 @@ import { withStyles, WithStyles } from '@material-ui/core';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 
 interface IScenarioPageProps extends WithStyles<typeof Style.styles> {
@@ -94,10 +93,10 @@ class ScenariosPage extends React.Component<IScenarioPageProps, IScenariosPageSt
                             this.state.currentScenarioIndex !== -1 ?
                                 <List>
                                     {
-                                        (actions || []).map((value, index) => {
+                                        (actions || []).map((action, index) => {
                                             return (
                                                 <ListItem key={index}>
-                                                    <ListItemText primary={value.name} />
+                                                    <ActionCard action={action} />
                                                 </ListItem>
                                             )
                                         })

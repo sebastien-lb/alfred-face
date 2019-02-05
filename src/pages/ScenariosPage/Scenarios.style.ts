@@ -9,14 +9,15 @@ const drawerWidth = 250;
 const ScenarioPageContainer = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between
+    align-items: flex-start;
     padding: 2rem;
 `;
 
 const ScenarioListContainer = styled.div `
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 2rem;
 `;
 

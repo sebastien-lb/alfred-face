@@ -14,9 +14,9 @@ class ConditionCard extends React.Component<IConditionCardProps, {}> {
         return (
             <Card>
                 <CardContent>
-                    <Typography component="h6" variant="h6">{this.props.condition.dataSource!.name}</Typography>
-                    <Typography component="h6" variant="h6">{this.props.condition.operator}</Typography>
-                    <Typography component="h6" variant="h6">{this.props.condition.value}</Typography>
+                    <Typography component="title" variant="title">Name: {this.props.condition.dataSource!.name}</Typography>
+                    <Typography component="title" variant="title">Operator: {this.props.condition.operator}</Typography>
+                    <Typography component="title" variant="title">Value: {this.props.condition.value}</Typography>
                 </CardContent>
             </Card>
         )
