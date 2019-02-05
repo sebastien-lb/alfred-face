@@ -1,12 +1,16 @@
 import styled from 'styled-components';
-import { COLOR } from '../../style';
+
+import { createStyles } from '@material-ui/core';
+
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
+const drawerWidth = 250;
 
 const ScenarioPageContainer = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     padding: 2rem;
-    background: ${COLOR.light1};
 `;
 
 const ScenarioListContainer = styled.div `
@@ -16,7 +20,17 @@ const ScenarioListContainer = styled.div `
     padding: 2rem;
 `;
 
+const styles = (theme: Theme) => createStyles({
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+        paddingLeft: drawerWidth,
+    },
+    toolbar: theme.mixins.toolbar,
+})
+
 export const Style = {
     ScenarioPageContainer,
     ScenarioListContainer,
+    styles,
 }

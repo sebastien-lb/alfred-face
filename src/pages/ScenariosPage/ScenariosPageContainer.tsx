@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { ScenariosPage } from './Scenarios';
+import { default as ScenariosPage } from './Scenarios';
 
 
 import { IStore } from '../../interfaces';

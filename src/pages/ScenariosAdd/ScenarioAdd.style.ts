@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+
+import { createStyles } from '@material-ui/core';
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 // import { COLOR } from '../../style';
 
 const AddScenarioFormContainer = styled.div`
@@ -24,9 +28,16 @@ const CardsContainer = styled.div`
     justify-content: space-around;
 `;
 
+const styles = (theme: Theme) => createStyles(
+    {
+        toolbar: theme.mixins.toolbar,
+    }
+)
+
 export const Style = {
     AddScenarioFormContainer,
     CardContainer,
     CardsContainer,
     SectionFormContainer,
+    styles,
 }

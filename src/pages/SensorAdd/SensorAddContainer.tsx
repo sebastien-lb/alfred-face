@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { SensorAddPage } from './SensorAddPage';
+import { default as SensorAddPage } from './SensorAddPage';
 
 import { IStore } from "../../interfaces";
 
