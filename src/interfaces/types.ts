@@ -1,1 +1,1 @@
-export type DataType = 'boolean' | 'string' | 'number' | null;
+export type DataType = 'boolean' | 'string' | 'color' | 'number' | null;

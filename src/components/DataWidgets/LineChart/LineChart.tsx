@@ -7,6 +7,7 @@ interface ILineChartProps {
     data: number[];
     labels: string[];
     title: string;
+    boolean?: boolean;
 }
 
 
@@ -20,8 +21,8 @@ export class LineChart extends React.Component<ILineChartProps, {}>  {
             datasets: [
                 {
                     label: this.props.title,
-                    fill: false,
-                    lineTension: 0.1,
+                    fill: this.props.boolean ? true : false,
+                    lineTension: this.props.boolean ? 0 : 0.1,
                     backgroundColor: 'rgba(75,192,192,0.4)',
                     borderColor: 'rgba(75,192,192,1)',
                     borderCapStyle: 'butt',
@@ -54,7 +55,7 @@ export class LineChart extends React.Component<ILineChartProps, {}>  {
         };
         return (
             <div>
-                <Line height={200} width={500} data={chardata} 
+                <Line height={200} width={900} data={chardata} 
                     options={chartOptions}/>
             </div>
         );
