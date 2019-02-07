@@ -4,5 +4,5 @@ export interface IScenarioCondition {
     id: string;
     operator: string;
     value: any;
-    dataSource: IDataSource;
+    dataSource?: IDataSource;
 }

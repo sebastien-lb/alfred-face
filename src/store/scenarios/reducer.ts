@@ -1,12 +1,13 @@
 import { Actions, ActionTypes } from './actions';
 
-import { IScenarioStore } from '../../interfaces';
+import { IScenario, IScenarioStore } from '../../interfaces';
 
 export function scenarioReducer(state: IScenarioStore = {}, action: Actions): IScenarioStore {
     let isLoading: boolean;
     let isLoadingError: boolean;
     let isAddingScenarioRequest: boolean;
     let isAddingScenarioError: boolean;
+    let scenarios: IScenario[];
 
     switch (action.type) {
         case ActionTypes.ADD_SCENARIO:
@@ -40,7 +41,8 @@ export function scenarioReducer(state: IScenarioStore = {}, action: Actions): IS
         case ActionTypes.FETCH_ALL_SCENARIO_SUCCESS:
             isLoading = false;
             isLoadingError = false;
-            return {...state, isLoading, isLoadingError};
+            scenarios = action.payload!.scenarios;
+            return {...state, isLoading, isLoadingError, scenarios};
 
         default:
             return {...state, };

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { DashboardPage } from './Dashboard';
+import { default as DashboardPage } from './Dashboard';
 
 import { IStore } from '../../interfaces';
 import { getNotifMessage, SMART_OBJECT_ACTIONS } from '../../store/smartobject';

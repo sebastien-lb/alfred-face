@@ -5,19 +5,62 @@ import { IScenario } from '../../interfaces'
 import { ActionTypes, SCENARIO_ACTIONS } from './actions';
 import { Api } from './api';
 
+import { IDataSource, IObjectAction, IScenarioCondition } from '../../interfaces';
+
 export function* fetchAllScenarioRequest(params:any): Iterator<any> {
     try {
         const token = params.payload.token;
         const rep = yield call(Api.fetchAllScenariosRequest, token);
         let data = rep.data;
-        data = data.map((item: any): IScenario => ({
-            id: item.id,
-            name: item.name,
-            objectActions: data.actions
-        }));
-        yield put(SCENARIO_ACTIONS.fetchAllScenarioSuccess());
+        console.log(data);
+        data = data.map((item: any): IScenario => {
+            console.log(item);
+            const objectActions: {[SmartObjectId: string]: IObjectAction[]} = {};
+            item.actions.map((action: any) => {
+                console.log(action);
+                action = action.action;
+                const objectAction: IObjectAction = {
+                    id: action.id,
+                    name: action.name,
+                    command: action.command,
+                    payload: action.datatype,
+                    important: action.important
+                }
+                let tempActions: IObjectAction[];
+                if (objectActions[action.smart_object]){
+                    tempActions = objectActions[action.smart_object];
+                    tempActions = [...tempActions, objectAction];
+                } else {
+                    tempActions = [objectAction];
+                }
+                objectActions[action.smart_object] = tempActions;
+            });
+            const conditionsArray = item.conditions instanceof Array ? item.conditions : [item.conditions]; // convert conditions to Array if it's not the case
+            return {
+                id: item.id,
+                name: item.name,
+                conditions: conditionsArray.map((condition:any): IScenarioCondition =>{
+                    const dataSource: IDataSource = 
+                    {
+                        id: condition.data_source.id,
+                        name: condition.data_source.name,
+                        description: condition.data_source.description,
+                        data_polling_type: condition.data_source.data_polling_type,
+                        data_type: condition.data_source.data_type
+                    };
+                    const id: string = condition.id;
+                    const operator: string = condition.operator.name;
+                    const value: any = condition.value;
+                    return {id, operator, value, dataSource };
+                }),
+                objectActions,
+            };
+        });
+        console.log(data);
+        yield put(SCENARIO_ACTIONS.fetchAllScenarioSuccess({scenarios: data}));
     }
     catch (error) {
+        console.log("load scenarios", error);
         yield put(SCENARIO_ACTIONS.fetchAllScenarioFailure());
     }
 }
@@ -35,9 +78,6 @@ export function* addScenarioRequest(params: any): Iterator<any> {
             data_source_id: item.datasource.id,
             value: item.value
         }));
-
-        console.log(conditions);
-
         yield call(Api.addScenarioRequest, params.payload.name, conditions, actionIds, params.payload.token);
         yield put(SCENARIO_ACTIONS.addScenarioSuccess())
     } catch (error) {

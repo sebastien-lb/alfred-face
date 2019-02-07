@@ -1,9 +1,11 @@
 
 
 import * as React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import { Styled } from './Header.style';
+
+import { withStyles, WithStyles } from '@material-ui/core';
 
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -20,12 +22,11 @@ interface IHeaderState {
     anchorEl: any;
 }
 
-interface IHeaderProps {
-    className?: string;
+interface IHeaderProps extends WithStyles<typeof Styled.styles> {
     goToDashboard: () => void;
     goToScenarios: () => void;
 }
-
+// className?: string;
 
 class Header extends React.Component<IHeaderProps, IHeaderState>  {
 
@@ -54,8 +55,8 @@ class Header extends React.Component<IHeaderProps, IHeaderState>  {
 
     public render() {
         return (
-            <AppBar position="static" className={this.props.className}>
-                <Toolbar className="ToolBar">
+            <AppBar position="fixed" className={this.props.classes.appBar}>
+                <Toolbar className={this.props.classes.toolBar}>
                     <IconButton 
                         color="inherit" 
                         aria-label="Menu"
@@ -82,7 +83,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState>  {
                         <MenuItem onClick={() => this.pushDashboard()}>Dashboard</MenuItem>
                         <MenuItem onClick={() => this.pushScenarios()}>Scenario</MenuItem>
                     </Menu>
-                    <Styled.AppTitle >
+                    <Styled.AppTitle className={this.props.classes.appTitle}>
                         Alfred
                     </Styled.AppTitle>
                     {/* <div>
@@ -98,4 +99,4 @@ class Header extends React.Component<IHeaderProps, IHeaderState>  {
     }
 }
 
-export default styled(Header)`${Styled.HeaderStyle}`
+export default withStyles(Styled.styles)(Header);

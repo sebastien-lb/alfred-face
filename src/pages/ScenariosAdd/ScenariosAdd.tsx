@@ -14,13 +14,15 @@ import { DataType, IDataSource, IObjectAction, IOperator, ISmartObject } from '.
 
 import { Style } from './ScenarioAdd.style';
 
+import { withStyles, WithStyles } from '@material-ui/core';
+
 interface IScenarioAddState {
     name: string;
     conditions: Array<{objectId?: string, datasource?: IDataSource, operatorId?: string, value?: string}>;
     actions: Array<{objectId?: string, action?: IObjectAction, payload?: string}>;
 }
 
-interface IScenarioAddProps {
+interface IScenarioAddProps extends WithStyles<typeof Style.styles> {
     userToken?: string;
     smartObjects: ISmartObject[];
     getActionsForSmartObject: (objectId: string) => IObjectAction[];
@@ -94,6 +96,7 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     public render() {
         return (
             <Style.AddScenarioFormContainer>
+                <div className={this.props.classes.toolbar} />
                 <TextField
                     id="name"
                     value={this.state.name}
@@ -151,4 +154,4 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     }
 }
 
-export { ScenariosAddPage } ;
+export default withStyles(Style.styles)(ScenariosAddPage);

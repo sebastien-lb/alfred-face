@@ -6,11 +6,13 @@ import TextField from '@material-ui/core/TextField';
 // import './Dashboard.css';
 import { Style } from './Dashboard.style';
 
+import { withStyles, WithStyles } from '@material-ui/core';
+
 import { Notification, ObjectCard } from '../../components';
 import { ISmartObject } from '../../interfaces';
 
 
-interface IDashboardPageProps {
+interface IDashboardPageProps extends WithStyles<typeof Style.styles> {
     userToken: string;
     notifMessage?: string;
     smartObjects: ISmartObject[];
@@ -58,6 +60,7 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
     public render() {
         return (
             <Style.DashboardPageContainer>
+                <div className={this.props.classes.toolbar} />
                 <div className="DashboardPage-ObjectCards">
                     {(this.props.smartObjects || []).map(smartObject =>
                         <Style.ObjectCardContainer key={`${smartObject.id}`}>
@@ -101,4 +104,4 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
     }
 }
 
-export { DashboardPage };
+export default withStyles(Style.styles)(DashboardPage);

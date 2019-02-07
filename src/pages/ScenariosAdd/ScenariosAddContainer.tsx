@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import{ ScenariosAddPage } from './ScenariosAdd';
+import{ default as ScenariosAddPage } from './ScenariosAdd';
 
 import { DataType, IDataSource, IObjectAction, IOperator, ISmartObject, IStore } from '../../interfaces';
 
