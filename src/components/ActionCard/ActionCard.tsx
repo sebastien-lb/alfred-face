@@ -25,9 +25,13 @@ class ActionCard extends React.Component<IActionCardProps, {}> {
                     <Typography component="title" variant="title">
                         Command: {this.props.action.command}
                     </Typography>
-                    <Typography component="title" variant="title">
-                        Payload type: {this.props.action.payload}
-                    </Typography>
+                    {
+                        this.props.action.payload ?
+                            <Typography component="title" variant="title">
+                                Payload type: { this.props.action.payload.toString()}
+                            </Typography>
+                        : null
+                    }
                 </CardContent>
             </Card>
         )

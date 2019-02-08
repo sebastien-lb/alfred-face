@@ -6,7 +6,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 const drawerWidth = 250;
 
-const ScenarioPageContainer = styled.div`
+const ScenarioPageListContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between
@@ -30,8 +30,26 @@ const styles = (theme: Theme) => createStyles({
     toolbar: theme.mixins.toolbar,
 })
 
+const ScenarioPageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+`;
+
+const TitleContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 250px;
+    padding: 1rem;
+`;
+
 export const Style = {
     ScenarioPageContainer,
+    ScenarioPageListContainer,
     ScenarioListContainer,
     styles,
+    TitleContainer,
 }
