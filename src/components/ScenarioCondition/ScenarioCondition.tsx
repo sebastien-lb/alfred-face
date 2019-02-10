@@ -33,7 +33,8 @@ class ScenarioCondition extends React.Component<IScenarioConditionProps, IScenar
     public handleChangeObject(objectId: string) {
         this.setState({objectId});
         if (this.props.onChange) {
-            this.props.onChange(objectId, this.state.datasource, this.state.operatorId, this.state.value);
+            // this.props.onChange(objectId, this.state.datasource, this.state.operatorId, this.state.value);
+            this.props.onChange(objectId, undefined, undefined, undefined);
         }
     }
 
@@ -41,14 +42,16 @@ class ScenarioCondition extends React.Component<IScenarioConditionProps, IScenar
         const newDatasource = (this.props.datasource || []).filter((datasource: IDataSource) => datasource.id === datasourceId)[0];
         this.setState({datasource: newDatasource});
         if (this.props.onChange) {
-            this.props.onChange(this.state.objectId, newDatasource, this.state.operatorId, this.state.value);
+            // this.props.onChange(this.state.objectId, newDatasource, this.state.operatorId, this.state.value);
+            this.props.onChange(this.state.objectId, newDatasource, undefined, undefined);
         }
     }
 
     public handleChangeOperator(operatorId: string) {
         this.setState({ operatorId });
         if (this.props.onChange) {
-            this.props.onChange(this.state.objectId, this.state.datasource, operatorId, this.state.value);
+            // this.props.onChange(this.state.objectId, this.state.datasource, operatorId, this.state.value);
+            this.props.onChange(this.state.objectId, this.state.datasource, operatorId, undefined);
         }
     }
 
@@ -63,7 +66,7 @@ class ScenarioCondition extends React.Component<IScenarioConditionProps, IScenar
         return (
             <Style.ConditionContainer>
                 {this.props.objectValue && this.props.objectValue.length ?
-                    <Selector key={this.state.objectId} name="Object" values={this.props.objectValue} onChange={(id: string) => this.handleChangeObject(id)}/>
+                    <Selector name="Object" values={this.props.objectValue} onChange={(id: string) => this.handleChangeObject(id)}/>
                 : null }
                 {this.state.objectId && this.props.datasource && this.props.datasource.length ?
                     <Selector name="DataSource" values={this.props.datasource} onChange={(id: string) => this.handleChangeDatasource(id)}/>

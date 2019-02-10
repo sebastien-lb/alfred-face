@@ -72,13 +72,13 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     }
 
     public handleActionChange(indexAction: number, objectId: string, action?: IObjectAction, payload?: string) {
-        this.setState({actions: this.state.actions.map((actionState, index) => {
+        this.setState({actions: [...this.state.actions.map((actionState, index) => {
             if (indexAction === index) {
                 console.log("handleActionChange", {...actionState, objectId, action, payload});
                 return {...actionState, objectId, action, payload};
             }
             return actionState;
-        })});
+        })]});
     }
 
     public handleAddAction() {

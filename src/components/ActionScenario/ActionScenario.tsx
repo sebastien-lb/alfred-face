@@ -29,17 +29,18 @@ class ActionScenario extends React.Component<IActionScenarioProps, IActionScenar
     }
 
     public handleChangeObject(objectId: string) {
-        this.setState({objectId});
+        this.setState({objectId, action: undefined, payload: undefined});
         if (this.props.onChange) {
-            this.props.onChange(objectId, this.state.action, this.state.payload);
+            // this.props.onChange(objectId, this.state.action, this.state.payload);
+            this.props.onChange(objectId, undefined, undefined);
         }
     }
 
     public handleChangeAction(actionId: string) {
         const newAction = (this.props.actions || []).filter((action: IObjectAction) => action.id === actionId)[0];
-        this.setState({action: newAction});
+        this.setState({action: newAction, payload: undefined});
         if (this.props.onChange) {
-            this.props.onChange(this.state.objectId, newAction, this.state.payload);
+            this.props.onChange(this.state.objectId, newAction, undefined);
         }
     }
 
@@ -51,10 +52,11 @@ class ActionScenario extends React.Component<IActionScenarioProps, IActionScenar
     }
 
     public render(){
+        console.log("render action scenar", this.state.objectId, this.props.actions, this.props.objectValue);
         return (
             <Style.ConditionContainer>
                 {this.props.objectValue && this.props.objectValue.length ?
-                    <Selector key={this.state.objectId} name="Object" values={this.props.objectValue} onChange={(id: string) => this.handleChangeObject(id)}/>
+                    <Selector name="Object" values={this.props.objectValue} onChange={(id: string) => this.handleChangeObject(id)}/>
                 : null }
                 {this.state.objectId && this.props.actions && this.props.actions.length ?
                     [
