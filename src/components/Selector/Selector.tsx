@@ -21,16 +21,14 @@ class Selector extends React.Component<ISelectorProps, ISelectorState> {
 
     constructor(props: ISelectorProps) {
         super(props);
-        console.log(this.props.values)
         const selectedValueId = this.props.values[0].id;
         const selectedValueName = this.props.values[0].name;
         this.state = {selectedValueId, selectedValueName};
     }
+
     public handleSelect(ev:any){
         const id = ev.target.value;
         const value = this.props.values.filter((v)=> v.id === id)[0];
-        console.log("Value selected");
-        console.log(value);
         const selectedValueId = value.id;
         const selectedValueName = value.name
         this.setState({selectedValueId, selectedValueName});
@@ -40,7 +38,6 @@ class Selector extends React.Component<ISelectorProps, ISelectorState> {
     }
 
     public render() {
-        console.log("render", this.state);
         return (
             <Style.SelectorContainer>
                 <InputLabel>{this.props.name}</InputLabel>
