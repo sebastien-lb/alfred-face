@@ -61,12 +61,17 @@ class DashboardPage extends React.Component <IDashboardPageProps,IDashboardPageS
         return (
             <Style.DashboardPageContainer>
                 <div className={this.props.classes.toolbar} />
+
+                <Button variant="contained" color='primary' onClick={() => this.props.fetchAllSmartObjectsRequest(this.props.userToken)}>
+                    Refresh
+                </Button>
+
                 <div className="DashboardPage-ObjectCards">
                     {(this.props.smartObjects || []).map(smartObject =>
                         <Style.ObjectCardContainer key={`${smartObject.id}`}>
-                            <ObjectCard 
-                                smartObject={smartObject} 
-                                category={"Category"} 
+                            <ObjectCard
+                                smartObject={smartObject}
+                                category={"Category"}
                                 onAction={(actionId, payload) => this.props.performActionRequest(actionId, payload, this.props.userToken, smartObject.id)}/>
                         </Style.ObjectCardContainer>
                     )}
