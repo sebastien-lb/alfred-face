@@ -11,7 +11,7 @@ import { DataType, IObjectAction } from '../../interfaces';
 
 export function widgetFactory(currentState: any, action: IObjectAction, onChange: (a?: any) => void): any {
     const dataToSendType: DataType = action.payload;
-    if(currentState === undefined && dataToSendType !== null) {
+    if (currentState === undefined && dataToSendType !== null && dataToSendType !== 'color') {
         return null;
     }
 
@@ -25,7 +25,7 @@ export function widgetFactory(currentState: any, action: IObjectAction, onChange
         case 'color':
             let additionnalProps: any = {};
             try {
-                const colorRGB = JSON.parse(currentState);
+                const colorRGB = currentState;
                 additionnalProps = {color: colorRGB};
             } catch (error) {
                 console.log("Cannot read state value");

@@ -36,7 +36,6 @@ export class Toggle extends React.Component<IToggleProps, IToggleState> {
     }
 
     public render() {
-        console.log('toggle render', this.props.status, this.state.status)
         return (
             <Switch
                 checked={this.state.status}
