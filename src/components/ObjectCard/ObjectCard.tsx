@@ -66,7 +66,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
         const dataSource = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0] : null;
         const dataSourceName: string = smartObject.dataSources && smartObject.dataSources.length ? smartObject.dataSources[0].name : "";
         const topActionToRender = this.getTopActionToRender();
-          
+
         return (
             <Card >
                 <Style.ObjectCardContainer>
@@ -83,7 +83,10 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                                 {dataSourceName}
                             </p>
                             <Style.ObjectStatusDescription>
-                                Status: {String(dataSource ? dataSource.latest_value : null)}
+                                Status: {String(dataSource ?
+                                    (typeof dataSource.latest_value === 'object' ? JSON.stringify(dataSource.latest_value) : dataSource.latest_value)
+                                    : null)
+                                }
                             </Style.ObjectStatusDescription>
                         </Style.ObjectCardItemContent>
                     </Style.ObjectCardItem>
@@ -106,7 +109,7 @@ class ObjectCard extends React.Component<IObjectCardProps, {}>  {
                     <ExpansionPanelDetails>
                         <Style.ExpansionPanelContent>
                             Data Sources
-                            {(this.props.smartObject.dataSources || []).map(source => 
+                            {(this.props.smartObject.dataSources || []).map(source =>
                                 <div key={`${source.id}`}>
                                     <DataWidgetFactory dataSource={source} data={source.history || source.latest_value || undefined}/>
                                 </div>

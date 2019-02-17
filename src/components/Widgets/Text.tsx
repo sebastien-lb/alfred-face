@@ -32,7 +32,6 @@ class Text extends React.Component<ITextProps, ITextState> {
     }
 
     public render() {
-        console.log('text render', this.props.status, this.state.status);
         return (
             <div className={this.props.className}>
             <TextField

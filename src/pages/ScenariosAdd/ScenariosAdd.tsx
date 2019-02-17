@@ -64,7 +64,6 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     public handleConditionChange(indexCondition: number, objectId: string, datasource?: IDataSource, operatorId?: string, value?: string) {
         this.setState({conditions: this.state.conditions.map((condition, index) => {
             if (indexCondition === index) {
-                console.log("handleCOnditionChange", {...condition, objectId, datasource, operatorId, value});
                 return {...condition, objectId, datasource, operatorId, value};
             }
             return condition;
@@ -74,7 +73,6 @@ class ScenariosAddPage extends React.Component<IScenarioAddProps, IScenarioAddSt
     public handleActionChange(indexAction: number, objectId: string, action?: IObjectAction, payload?: string) {
         this.setState({actions: [...this.state.actions.map((actionState, index) => {
             if (indexAction === index) {
-                console.log("handleActionChange", {...actionState, objectId, action, payload});
                 return {...actionState, objectId, action, payload};
             }
             return actionState;

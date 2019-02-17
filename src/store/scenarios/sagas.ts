@@ -12,12 +12,9 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
         const token = params.payload.token;
         const rep = yield call(Api.fetchAllScenariosRequest, token);
         let data = rep.data;
-        console.log(data);
         data = data.map((item: any): IScenario => {
-            console.log(item);
             const objectActions: {[SmartObjectId: string]: IObjectAction[]} = {};
             item.actions.map((action: any) => {
-                console.log(action);
                 action = action.action;
                 const objectAction: IObjectAction = {
                     id: action.id,
@@ -40,7 +37,7 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
                 id: item.id,
                 name: item.name,
                 conditions: conditionsArray.map((condition:any): IScenarioCondition =>{
-                    const dataSource: IDataSource = 
+                    const dataSource: IDataSource =
                     {
                         id: condition.data_source.id,
                         name: condition.data_source.name,
@@ -56,7 +53,6 @@ export function* fetchAllScenarioRequest(params:any): Iterator<any> {
                 objectActions,
             };
         });
-        console.log(data);
         yield put(SCENARIO_ACTIONS.fetchAllScenarioSuccess({scenarios: data}));
     }
     catch (error) {
